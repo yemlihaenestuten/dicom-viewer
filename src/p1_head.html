@@ -5,6 +5,7 @@
 <meta name="theme-color" content="#0d1013">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DICOM Görüntüleyici</title>
+<link rel="icon" href="LOGO_DATA_URI">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +26,7 @@ h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.01em}
 .brand{display:flex;align-items:center;gap:8px 10px;margin-right:auto;flex-wrap:wrap;min-width:0}
 .by{color:var(--mute);font-size:12px;font-weight:500;letter-spacing:.2px}
 h1{letter-spacing:.6px}
-.logo{width:18px;height:18px;border-radius:4px;background:conic-gradient(var(--c-ax) 0 33%,var(--c-co) 0 66%,var(--c-sa) 0)}
+.logo{width:22px;height:22px;border-radius:5px;background:url("LOGO_DATA_URI") center/cover no-repeat}
 .btn,.tab{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;min-height:34px;display:inline-flex;align-items:center;justify-content:center}
 .btn:hover,.tab:hover{border-color:#3a4550}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -255,6 +256,24 @@ footer{display:flex;flex-direction:column;gap:6px}
   .toolrow{gap:6px 8px;padding:6px 8px}
   .toolrow .grp{gap:6px}
   .toolrow .btn{padding-left:8px;padding-right:8px}
+  #homeBtn .tx{display:none}
+  #homeBtn .ic{margin-right:0}
+}
+/* ---- masaüstü: tek sayfa, kaydırma yok. İşaretler ve etiketler yan panelde (telefon düzeni değişmez) ---- */
+#mkBtn,.sideX{display:none}
+#mkBtn .cnt:not(:empty){margin-left:6px;min-width:20px;padding:0 6px;border-radius:10px;background:var(--mark);color:#241a05;font-size:11px;font-weight:700;line-height:18px;text-align:center}
+#mkBtn[aria-expanded=true]{border-color:var(--accent);color:var(--accent);background:#10211f}
+@media(min-width:721px) and (hover:hover),(min-width:721px) and (min-height:521px){
+  #mkBtn{display:inline-flex;align-items:center;white-space:nowrap}
+  .side{position:fixed;top:10px;right:10px;bottom:10px;width:min(460px,calc(100vw - 20px));z-index:60;overflow:auto;box-shadow:-12px 0 40px rgba(0,0,0,.55);display:none}
+  body.sideOpen .side{display:flex}
+  .sideX{display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;min-height:34px;padding:0;font-size:18px}
+  .side .tabs{position:sticky;top:-10px;z-index:1;background:var(--panel);padding:2px 0 6px}
+  .side #markList,.side #rulerList{grid-template-columns:1fr}
+  .side .allmk{margin:8px 0 0}
+  .side .tagwrap{max-height:none}
+  footer{flex-direction:row;flex-wrap:wrap;align-items:center;gap:2px 14px;line-height:1.35}
+  footer .credit{width:auto;margin-left:auto;padding-top:0;border-top:0}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -293,6 +312,7 @@ footer{display:flex;flex-direction:column;gap:6px}
     <button class="btn" id="angBtn" type="button" aria-pressed="false">Açı</button>
     <select id="angDev" aria-label="Cihaz" hidden><option value="varian">Varian (180° altta)</option><option value="elekta">Elekta (0° altta)</option></select>
   </div>
+  <button class="btn" id="mkBtn" type="button" aria-expanded="false" aria-controls="side"><span>İşaretler / Etiketler</span><span class="cnt" id="mkBtnN" data-nt></span></button>
   <button class="btn" id="advBtn" type="button" aria-expanded="false" aria-controls="adv">Ayarlar</button>
   <button class="btn" id="homeBtn" type="button" title="Görünümü dosya ilk yüklendiğindeki haline getirir: tüm seriler ayrı kutularda, ortalanmış, yakınlaştırmasız, varsayılan kontrast"><span class="ic" aria-hidden="true">⟲</span> <span class="tx">İlk görünüm</span></button>
 </nav>
@@ -334,10 +354,11 @@ footer{display:flex;flex-direction:column;gap:6px}
   <div class="views" id="views"></div>
   <div class="grid" id="grid" hidden></div>
   <div class="probe" id="probe"></div>
-  <aside class="side">
+  <aside class="side" id="side" aria-label="İşaretler ve etiketler">
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tbMarks" aria-selected="true"><span>İşaretler</span>&nbsp;(<span id="mkN">0</span>)</button>
       <button class="tab" role="tab" id="tbTags" aria-selected="false">Etiketler</button>
+      <button class="btn sideX" id="sideX" type="button" aria-label="Kapat">×</button>
     </div>
     <div id="tabMarks">
       <p class="hint">İşaretle aracıyla bir kesite dokunun, Cetvel aracıyla iki nokta arasını sürükleyin. Listeden bir öğeye basınca kesit oraya gider.</p>

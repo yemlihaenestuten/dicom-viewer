@@ -6,7 +6,7 @@
 
 <a id="tr"></a>
 
-# DICOM Görüntüleyici (V.3)
+# DICOM Görüntüleyici (V.4)
 
 Tomografi (BT), MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosyalık ücretsiz DICOM görüntüleyici. Kurulum gerekmez. Görüntüler hiçbir yere yüklenmez, cihazda kalır. Tanı amaçlı değildir, yalnızca inceleme içindir.
 
@@ -31,6 +31,7 @@ Tomografi (BT), MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosy
 - PET/BT füzyonu ve elle hizalama
 - **Açı** düğmesi: görüntü kenarında 0-360° skala. Varian (180° altta) ve Elekta (0° altta)
 - **İlk görünüm** düğmesi, düğme açıklamaları
+- Masaüstünde her ekranda tek sayfa, kaydırma yok. İşaretler ve etiketler **İşaretler / Etiketler** düğmesiyle açılan yan panelde
 - Türkçe, English, Deutsch, 한국어, 日本語, Русский arayüz
 
 ## Çevrimdışı çalışma ve güncelleme
@@ -45,7 +46,7 @@ Geliştiren: Medikal Fizik Uzmanı Yemliha Enes Tüten
 
 <a id="en"></a>
 
-# DICOM Viewer (V.3)
+# DICOM Viewer (V.4)
 
 A free single-file DICOM viewer that opens CT, MR, X-ray and PET images in the browser. No installation needed. Images are never uploaded and stay on your device. For review only, not for diagnosis.
 
@@ -70,6 +71,7 @@ A free single-file DICOM viewer that opens CT, MR, X-ray and PET images in the b
 - PET/CT fusion with manual alignment
 - **Angle** button: a 0-360° scale around the image edges. Varian (180° at the bottom) and Elekta (0° at the bottom)
 - **Initial view** button and hover tooltips
+- On desktop everything fits on one page on any screen. Markers and tags are in a side panel opened with **Markers / Tags**
 - Interface in Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Offline use and updates
@@ -84,7 +86,7 @@ Developed by Yemliha Enes Tüten, Medical Physics Expert
 
 <a id="de"></a>
 
-# DICOM-Betrachter (V.3)
+# DICOM-Betrachter (V.4)
 
 Ein kostenloser Ein-Datei-DICOM-Betrachter, der CT-, MR-, Röntgen- und PET-Bilder im Browser öffnet. Keine Installation nötig. Bilder werden nicht hochgeladen und bleiben auf Ihrem Gerät. Nur zur Ansicht, nicht zur Diagnose.
 
@@ -109,6 +111,7 @@ Ein kostenloser Ein-Datei-DICOM-Betrachter, der CT-, MR-, Röntgen- und PET-Bild
 - PET/CT-Fusion mit manueller Ausrichtung
 - Schaltfläche **Winkel**: Skala von 0 bis 360° am Bildrand. Varian (180° unten) und Elekta (0° unten)
 - Schaltfläche **Ausgangsansicht** und Hinweise beim Überfahren mit der Maus
+- Am Desktop alles auf einer Seite ohne Scrollen. Markierungen und Tags im Seitenfeld über **Markierungen / Tags**
 - Oberfläche in Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Offline-Nutzung und Updates
@@ -123,7 +126,7 @@ Entwickelt von Yemliha Enes Tüten, Medizinphysik-Experte
 
 <a id="ko"></a>
 
-# DICOM 뷰어 (V.3)
+# DICOM 뷰어 (V.4)
 
 CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM 뷰어입니다. 설치가 필요 없습니다. 이미지는 업로드되지 않고 기기에 남습니다. 진단용이 아니라 열람용입니다.
 
@@ -148,6 +151,7 @@ CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM
 - PET/CT 융합 및 수동 정렬
 - **각도** 버튼: 이미지 가장자리에 0–360° 눈금. Varian(180° 아래)과 Elekta(0° 아래)
 - **초기 화면** 버튼과 마우스 오버 설명
+- 데스크톱에서는 어떤 화면에서도 한 페이지, 스크롤 없음. 마커와 태그는 **마커 / 태그** 버튼의 측면 패널에
 - Türkçe, English, Deutsch, 한국어, 日本語, Русский 인터페이스
 
 ## 오프라인 사용과 업데이트
@@ -162,7 +166,7 @@ CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM
 
 <a id="ja"></a>
 
-# DICOM ビューア (V.3)
+# DICOM ビューア (V.4)
 
 CT、MR、X線、PET画像をブラウザで開く無料の単一ファイルDICOMビューアです。インストールは不要です。画像はアップロードされず、お使いの端末内にとどまります。診断用ではなく閲覧専用です。
 
@@ -187,6 +191,7 @@ CT、MR、X線、PET画像をブラウザで開く無料の単一ファイルDIC
 - PET/CTフュージョンと手動位置合わせ
 - **角度**ボタン：画像の端に0〜360°の目盛り。Varian（180°が下）とElekta（0°が下）
 - **初期表示**ボタンとマウスオーバーの説明
+- デスクトップではどの画面でも1ページ、スクロール不要。マーカーとタグは**マーカー / タグ**ボタンのサイドパネルに
 - Türkçe、English、Deutsch、한국어、日本語、Русскийのインターフェース
 
 ## オフライン利用と更新
@@ -201,7 +206,7 @@ Webアドレスをインターネット接続中に一度開くと、その後�
 
 <a id="ru"></a>
 
-# DICOM-просмотрщик (V.3)
+# DICOM-просмотрщик (V.4)
 
 Бесплатный DICOM-просмотрщик в одном файле, открывающий изображения КТ, МРТ, рентгена и ПЭТ в браузере. Установка не нужна. Изображения не загружаются и остаются на вашем устройстве. Только для просмотра, не для диагностики.
 
@@ -226,6 +231,7 @@ Webアドレスをインターネット接続中に一度開くと、その後�
 - Слияние ПЭТ/КТ с ручным совмещением
 - Кнопка **Угол**: шкала 0–360° по краям изображения. Varian (180° внизу) и Elekta (0° внизу)
 - Кнопка **Исходный вид** и подсказки при наведении мыши
+- На компьютере всё на одной странице без прокрутки. Метки и теги — в боковой панели по кнопке **Метки / Теги**
 - Интерфейс на Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Работа офлайн и обновление

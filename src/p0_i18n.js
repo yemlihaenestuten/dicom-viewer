@@ -1,6 +1,6 @@
 /* ---------- Dil desteği: Türkçe (varsayılan), İngilizce, Almanca, Korece, Japonca, Rusça ---------- */
 /* Kaynak metinler Türkçedir. TX() tam eşleşme arar, bulamazsa ifade kalıplarını (PHR) uygular. */
-const VER='V.3';
+const VER='V.4';
 const BUILD_DATE='';/* yayın tarihi GG.AA.YYYY (make_site.py yazar) */
 const UPDATE_URL='';/* yayın adresi (GitHub Pages) */
 const UPD_FILE=location.protocol==='file:';
@@ -232,6 +232,10 @@ const EXACT_ROWS=[
  ["Yeni sürüm indiriliyor.", "Downloading the new version.", "Die neue Version wird heruntergeladen.", "새 버전을 다운로드하는 중입니다.", "新しいバージョンをダウンロード中です。", "Скачивается новая версия."],
  ["Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.", "You are offline. Updating needs an internet connection. The program keeps working with the current version.", "Sie sind offline. Für das Update ist eine Internetverbindung nötig. Das Programm läuft mit der aktuellen Version weiter.", "오프라인 상태입니다. 업데이트에는 인터넷 연결이 필요합니다. 프로그램은 현재 버전으로 계속 작동합니다.", "オフラインです。更新にはインターネット接続が必要です。プログラムは現在のバージョンで引き続き動作します。", "Нет подключения к интернету. Для обновления нужен интернет. Программа продолжает работать в текущей версии."],
  ["Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.", "Could not get the version information. Check your internet connection.", "Die Versionsinformation konnte nicht abgerufen werden. Prüfen Sie die Internetverbindung.", "버전 정보를 가져올 수 없습니다. 인터넷 연결을 확인하세요.", "バージョン情報を取得できませんでした。インターネット接続を確認してください。", "Не удалось получить сведения о версии. Проверьте подключение к интернету."],
+ ["İşaretler / Etiketler", "Markers / Tags", "Markierungen / Tags", "마커 / 태그", "マーカー / タグ", "Метки / Теги"],
+ ["İşaretler, ölçümler ve DICOM etiketleri panelini açar ya da kapatır", "Opens or closes the panel with markers, measurements and DICOM tags", "Öffnet oder schließt das Feld mit Markierungen, Messungen und DICOM-Tags", "마커, 측정값, DICOM 태그 패널을 열거나 닫습니다", "マーカー、計測、DICOMタグのパネルを開閉します", "Открывает или закрывает панель меток, измерений и DICOM-тегов"],
+ ["Paneli kapatır", "Closes the panel", "Schließt das Feld", "패널을 닫습니다", "パネルを閉じます", "Закрывает панель"],
+ ["İşaretler ve etiketler", "Markers and tags", "Markierungen und Tags", "마커와 태그", "マーカーとタグ", "Метки и теги"],
  ["Çevrimdışısınız", "Offline", "Offline", "오프라인", "オフライン", "Офлайн"],
  ["İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder", "No internet connection. Updates cannot be checked. The program keeps working with this version", "Keine Internetverbindung. Updates können nicht geprüft werden. Das Programm läuft mit dieser Version weiter", "인터넷에 연결되어 있지 않습니다. 업데이트를 확인할 수 없습니다. 프로그램은 현재 버전으로 계속 작동합니다", "インターネットに接続されていません。更新を確認できません。プログラムはこのバージョンで引き続き動作します", "Нет подключения к интернету. Проверить обновления нельзя. Программа продолжает работать в этой версии"],
  ["Güncelleme var", "Update available", "Update verfügbar", "업데이트 있음", "更新があります", "Доступно обновление"],
@@ -371,6 +375,7 @@ body:`<h3>Nerelerde çalışır</h3>
 <li><b>Açı</b> düğmesi tüm kesitlerin kenarında 0-360° açı skalasını gösterir. Cihaz listesinden Varian (180° altta) ya da Elekta (0° altta) seçilir.</li>
 <li>Fareyle bir düğmenin üstüne gelince ne işe yaradığını yazar. <b>İlk görünüm</b> düğmesi ekranı dosya ilk yüklendiğinde tüm serilerin ayrı kutularda açıldığı haline döndürür.</li>
 <li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar ve bulursa indirmeden önce sorar. İnternet yoksa düğmenin yanında <b>Çevrimdışısınız</b> yazar. Her güncellemeden sonra <b>Yenilikler</b> penceresi açılır.</li>
+<li>Masaüstünde program her ekranda tek sayfaya sığar, kaydırma gerekmez. İşaretler, ölçümler ve DICOM etiketleri araç çubuğundaki <b>İşaretler / Etiketler</b> düğmesiyle açılan yan paneldedir.</li>
 </ul>
 <h3>Bilmeniz gerekenler</h3>
 <ul>
@@ -408,6 +413,7 @@ body:`<h3>Where it works</h3>
 <li>The <b>Angle</b> button shows a 0-360° angle scale around the edges of every view. Choose Varian (180° at the bottom) or Elekta (0° at the bottom) from the device list.</li>
 <li>Hovering over a button with the mouse shows what it does. The <b>Initial view</b> button returns the screen to the layout shown when the file was first loaded, with all series open in separate cells.</li>
 <li>Works offline both as a single file and from a web address. The <b>Update</b> button at the bottom of the page downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself and asks before downloading it. Without internet, <b>Offline</b> appears next to the button. After every update a <b>What's new</b> window opens.</li>
+<li>On desktop the program fits on one page on any screen, no scrolling needed. Markers, measurements and DICOM tags are in a side panel opened with the <b>Markers / Tags</b> button in the toolbar.</li>
 </ul>
 <h3>Good to know</h3>
 <ul>
@@ -445,6 +451,7 @@ body:`<h3>Wo es funktioniert</h3>
 <li>Die Schaltfläche <b>Winkel</b> zeigt am Rand jeder Ansicht eine Winkelskala von 0 bis 360°. In der Geräteliste wählen Sie Varian (180° unten) oder Elekta (0° unten).</li>
 <li>Beim Überfahren einer Schaltfläche mit der Maus wird angezeigt, was sie tut. Die Schaltfläche <b>Ausgangsansicht</b> stellt die Ansicht wie beim ersten Laden der Datei wieder her, mit allen Serien in getrennten Feldern.</li>
 <li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> unten auf der Seite lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version und fragt vor dem Herunterladen. Ohne Internet steht neben der Schaltfläche <b>Offline</b>. Nach jedem Update öffnet sich das Fenster <b>Neuigkeiten</b>.</li>
+<li>Am Desktop passt das Programm auf jedem Bildschirm auf eine Seite, ohne Scrollen. Markierungen, Messungen und DICOM-Tags stehen in einem Seitenfeld, das die Schaltfläche <b>Markierungen / Tags</b> in der Werkzeugleiste öffnet.</li>
 </ul>
 <h3>Gut zu wissen</h3>
 <ul>
@@ -482,6 +489,7 @@ body:`<h3>사용 가능한 환경</h3>
 <li><b>각도</b> 버튼은 모든 화면의 가장자리에 0–360° 각도 눈금을 표시합니다. 장비 목록에서 Varian(180° 아래) 또는 Elekta(0° 아래)를 선택하세요.</li>
 <li>마우스를 버튼 위에 올리면 기능 설명이 표시됩니다. <b>초기 화면</b> 버튼은 파일을 처음 불러왔을 때의 화면, 즉 모든 시리즈가 개별 칸에 열린 상태로 되돌립니다.</li>
 <li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인하고, 발견하면 다운로드 전에 묻습니다. 인터넷이 없으면 버튼 옆에 <b>오프라인</b>이 표시됩니다. 업데이트할 때마다 <b>새로운 기능</b> 창이 열립니다.</li>
+<li>데스크톱에서는 어떤 화면에서도 한 페이지에 맞춰져 스크롤이 필요 없습니다. 마커, 측정값, DICOM 태그는 도구 모음의 <b>마커 / 태그</b> 버튼으로 여는 측면 패널에 있습니다.</li>
 </ul>
 <h3>알아 두세요</h3>
 <ul>
@@ -519,6 +527,7 @@ body:`<h3>動作環境</h3>
 <li><b>角度</b>ボタンは、すべてのビューの端に0〜360°の角度目盛りを表示します。装置のリストからVarian（180°が下）またはElekta（0°が下）を選択します。</li>
 <li>ボタンにマウスを重ねると、その機能が表示されます。<b>初期表示</b>ボタンは、ファイルを最初に読み込んだときの表示、つまりすべてのシリーズが別々のセルに開いた状態に戻します。</li>
 <li>単一ファイルでもWebアドレスからでもオフラインで動作します。ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認し、見つかるとダウンロード前に確認します。インターネットがないとボタンの横に<b>オフライン</b>と表示されます。更新のたびに<b>新機能</b>ウィンドウが開きます。</li>
+<li>デスクトップではどの画面でも1ページに収まり、スクロールは不要です。マーカー、計測、DICOMタグはツールバーの<b>マーカー / タグ</b>ボタンで開くサイドパネルにあります。</li>
 </ul>
 <h3>ご注意</h3>
 <ul>
@@ -556,6 +565,7 @@ body:`<h3>Где работает</h3>
 <li>Кнопка <b>Угол</b> показывает шкалу углов 0–360° по краям всех изображений. В списке аппаратов выберите Varian (180° внизу) или Elekta (0° внизу).</li>
 <li>При наведении мыши на кнопку показывается, для чего она нужна. Кнопка <b>Исходный вид</b> возвращает экран к виду при первой загрузке файла: все серии открыты в отдельных ячейках.</li>
 <li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> внизу страницы скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии и спрашивает перед скачиванием. Без интернета рядом с кнопкой появляется <b>Офлайн</b>. После каждого обновления открывается окно <b>Что нового</b>.</li>
+<li>На компьютере программа помещается на одну страницу на любом экране, без прокрутки. Метки, измерения и DICOM-теги находятся в боковой панели, которую открывает кнопка <b>Метки / Теги</b> на панели инструментов.</li>
 </ul>
 <h3>Важно знать</h3>
 <ul>
@@ -576,35 +586,35 @@ ru:["Файлы обрабатываются только в вашем брау
 /* ---------- Yenilikler penceresi: her sürümde 6 dilde güncellenir ---------- */
 const NEWS={
 tr:{title:'Yenilikler',hide:'Bir daha gösterme',btn:'Tamam',items:[
- 'Yeni sürüm bulununca indirmeden önce sorulur. <b>İndir</b> derseniz yeni dosya kaydedilir. <b>Şimdi değil</b> derseniz daha sonra <b>Güncelle</b> düğmesiyle indirebilirsiniz.',
- 'İnternet yoksa <b>Güncelle</b> düğmesinin yanında <b>Çevrimdışısınız</b> uyarısı görünür.',
- 'Sağ altta sürüm numarasının yanında yayın tarihi de yazar.',
- 'Her güncellemeden sonra bu <b>Yenilikler</b> penceresi açılır. <b>Bir daha gösterme</b> kutusunu işaretlerseniz bu sürüm için bir daha açılmaz.']},
+ 'Masaüstünde işaretler, ölçümler ve DICOM etiketleri artık araç çubuğundaki <b>İşaretler / Etiketler</b> düğmesiyle açılan yan panelde. Tüm serilerin işaret listesi de bu panelde. Düğmedeki sayı işaret sayısını gösterir.',
+ 'Masaüstünde program hangi ekranda açılırsa açılsın tek sayfaya sığar. Aşağı kaydırma gerekmez, görüntü alanı ekranı en iyi şekilde kullanır.',
+ 'Telefon görünümü değişmedi.',
+ 'Uygulamanın simgesi yenilendi.']},
 en:{title:"What's new",hide:"Don't show again",btn:'OK',items:[
- 'When a new version is found, you are asked before it is downloaded. Choose <b>Download</b> to save the new file. Choose <b>Not now</b> to download it later with the <b>Update</b> button.',
- 'Without internet, an <b>Offline</b> notice appears next to the <b>Update</b> button.',
- 'The release date is now shown next to the version number at the bottom right.',
- "This <b>What's new</b> window opens after every update. Tick <b>Don't show again</b> and it will not open again for this version."]},
+ 'On desktop, markers, measurements and DICOM tags now open in a side panel with the <b>Markers / Tags</b> button in the toolbar. The marker list of all series is in this panel too. The number on the button shows how many markers there are.',
+ 'On desktop the program now fits on one page on any screen. No scrolling is needed and the image area makes the best use of the screen.',
+ 'The phone layout is unchanged.',
+ 'The app icon has been redesigned.']},
 de:{title:'Neuigkeiten',hide:'Nicht mehr anzeigen',btn:'OK',items:[
- 'Wird eine neue Version gefunden, werden Sie vor dem Herunterladen gefragt. Mit <b>Herunterladen</b> wird die neue Datei gespeichert. Mit <b>Jetzt nicht</b> können Sie sie später über <b>Aktualisieren</b> herunterladen.',
- 'Ohne Internet erscheint neben <b>Aktualisieren</b> der Hinweis <b>Offline</b>.',
- 'Unten rechts steht neben der Versionsnummer jetzt auch das Veröffentlichungsdatum.',
- 'Dieses Fenster <b>Neuigkeiten</b> öffnet sich nach jedem Update. Wenn Sie <b>Nicht mehr anzeigen</b> ankreuzen, öffnet es sich für diese Version nicht mehr.']},
+ 'Am Desktop öffnen sich Markierungen, Messungen und DICOM-Tags jetzt in einem Seitenfeld über die Schaltfläche <b>Markierungen / Tags</b> in der Werkzeugleiste. Dort steht auch die Markierungsliste aller Serien. Die Zahl auf der Schaltfläche zeigt die Anzahl der Markierungen.',
+ 'Am Desktop passt das Programm jetzt auf jedem Bildschirm auf eine Seite. Scrollen ist nicht nötig, der Bildbereich nutzt den Bildschirm optimal.',
+ 'Die Telefonansicht bleibt unverändert.',
+ 'Das App-Symbol wurde neu gestaltet.']},
 ko:{title:'새로운 기능',hide:'다시 표시하지 않음',btn:'확인',items:[
- '새 버전이 발견되면 다운로드하기 전에 묻습니다. <b>다운로드</b>를 선택하면 새 파일이 저장됩니다. <b>나중에</b>를 선택하면 나중에 <b>업데이트</b> 버튼으로 다운로드할 수 있습니다.',
- '인터넷이 없으면 <b>업데이트</b> 버튼 옆에 <b>오프라인</b> 알림이 표시됩니다.',
- '오른쪽 아래 버전 번호 옆에 배포 날짜도 표시됩니다.',
- '업데이트할 때마다 이 <b>새로운 기능</b> 창이 열립니다. <b>다시 표시하지 않음</b>을 선택하면 이 버전에서는 다시 열리지 않습니다.']},
+ '데스크톱에서 마커, 측정값, DICOM 태그가 이제 도구 모음의 <b>마커 / 태그</b> 버튼으로 여는 측면 패널에 표시됩니다. 모든 시리즈의 마커 목록도 이 패널에 있습니다. 버튼의 숫자는 마커 수를 나타냅니다.',
+ '데스크톱에서는 어떤 화면에서도 프로그램이 한 페이지에 맞춰집니다. 스크롤할 필요가 없고 영상 영역이 화면을 최대한 활용합니다.',
+ '휴대폰 화면 구성은 바뀌지 않았습니다.',
+ '앱 아이콘이 새로워졌습니다.']},
 ja:{title:'新機能',hide:'今後表示しない',btn:'OK',items:[
- '新しいバージョンが見つかると、ダウンロード前に確認します。<b>ダウンロード</b>を選ぶと新しいファイルが保存されます。<b>後で</b>を選ぶと、後から<b>更新</b>ボタンでダウンロードできます。',
- 'インターネットに接続していないと、<b>更新</b>ボタンの横に<b>オフライン</b>と表示されます。',
- '右下のバージョン番号の横に公開日も表示されるようになりました。',
- '更新のたびにこの<b>新機能</b>ウィンドウが開きます。<b>今後表示しない</b>にチェックすると、このバージョンでは再び開きません。']},
+ 'デスクトップでは、マーカー、計測、DICOMタグがツールバーの<b>マーカー / タグ</b>ボタンで開くサイドパネルに表示されるようになりました。全シリーズのマーカー一覧もこのパネルにあります。ボタンの数字はマーカーの数です。',
+ 'デスクトップでは、どの画面でもプログラムが1ページに収まります。スクロールは不要で、画像エリアが画面を最大限に使います。',
+ 'スマートフォンの表示は変わっていません。',
+ 'アプリのアイコンを新しくしました。']},
 ru:{title:'Что нового',hide:'Больше не показывать',btn:'ОК',items:[
- 'Если найдена новая версия, перед скачиванием появляется вопрос. Нажмите <b>Скачать</b>, чтобы сохранить новый файл. Нажмите <b>Не сейчас</b>, чтобы скачать его позже кнопкой <b>Обновить</b>.',
- 'Без интернета рядом с кнопкой <b>Обновить</b> появляется надпись <b>Офлайн</b>.',
- 'Справа внизу рядом с номером версии теперь указана дата выпуска.',
- 'Это окно <b>Что нового</b> открывается после каждого обновления. Если отметить <b>Больше не показывать</b>, для этой версии оно больше не откроется.']}
+ 'На компьютере метки, измерения и DICOM-теги теперь открываются в боковой панели кнопкой <b>Метки / Теги</b> на панели инструментов. Там же список меток всех серий. Число на кнопке показывает количество меток.',
+ 'На компьютере программа теперь помещается на одну страницу на любом экране. Прокрутка не нужна, область изображения максимально использует экран.',
+ 'Вид на телефоне не изменился.',
+ 'Значок приложения обновлён.']}
 };
 function fillNews(){
   const n=NEWS[LANG]||NEWS.tr,t=document.getElementById('nTitle');if(!t)return;
@@ -630,6 +640,8 @@ const TIPS=[
  ["#angBtn","Tüm kesitlerin kenarında 0-360° açı skalasını gösterir ya da gizler"],
  ["#angDev","Cihaz seçimi: Varian'da 180° görüntünün altında, Elekta'da 0° altında yer alır"],
  ["#helpBtn","Kullanım kılavuzunu ve özellik listesini açar"],
+ ["#mkBtn","İşaretler, ölçümler ve DICOM etiketleri panelini açar ya da kapatır"],
+ ["#sideX","Paneli kapatır"],
  ["#uaYes","Yeni sürümü indirip kaydeder"],
  ["#uaNo","Şimdilik indirmez. Daha sonra Güncelle düğmesiyle indirebilirsiniz"],
  ["#nClose","Yenilikler penceresini kapatır"],

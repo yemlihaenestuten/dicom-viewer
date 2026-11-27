@@ -42,16 +42,53 @@ open(o+'manifest.webmanifest','w',encoding='utf-8').write(json.dumps({
  'name':'DICOM Görüntüleyici','short_name':'DICOM','description':'CT, MR, X-ray, PET DICOM viewer. Offline, single file.',
  'start_url':'./','scope':'./','display':'standalone','background_color':'#0d1013','theme_color':'#0d1013','lang':'tr',
  'icons':[{'src':'icon-192.png','sizes':'192x192','type':'image/png'},{'src':'icon-512.png','sizes':'512x512','type':'image/png'},{'src':'icon-maskable.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]},ensure_ascii=False,indent=1)+'\n')
-def icon(size,pad,round_):
-    S=size*4;im=Image.new('RGBA',(S,S),(0,0,0,0));g=ImageDraw.Draw(im)
-    bg=(13,16,19,255);ac=(76,194,176,255);dim=(37,45,53,255)
-    if round_:g.rounded_rectangle([0,0,S-1,S-1],radius=int(S*.22),fill=bg)
-    else:g.rectangle([0,0,S,S],fill=bg)
-    c=S/2;r=S*(0.5-pad)*0.78
-    g.ellipse([c-r,c-r,c+r,c+r],outline=ac,width=int(S*.035))
-    r2=r*.55;g.ellipse([c-r2,c-r2,c+r2,c+r2],outline=dim,width=int(S*.03))
-    w=int(S*.03);g.line([c-r*1.12,c,c+r*1.12,c],fill=ac,width=w);g.line([c,c-r*1.12,c,c+r*1.12],fill=ac,width=w)
-    g.ellipse([c-S*.03,c-S*.03,c+S*.03,c+S*.03],fill=(242,184,75,255))
+# ---- simge: koyu camgöbeği zemin, aksiyel beyin kesiti, nişangâh ----
+LOGO_SVG=("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
+ "<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1b4b55'/><stop offset='1' stop-color='#0a1317'/></linearGradient>"
+ "<radialGradient id='b' cx='.5' cy='.45' r='.6'><stop offset='0' stop-color='#b3bec7'/><stop offset='1' stop-color='#6c7a85'/></radialGradient></defs>"
+ "<rect width='64' height='64' rx='14' fill='url(#g)'/>"
+ "<ellipse cx='32' cy='33' rx='15.5' ry='18.5' fill='#eef3f6'/>"
+ "<ellipse cx='32' cy='33' rx='12.6' ry='15.6' fill='url(#b)'/>"
+ "<path d='M32 18.5V47.5' stroke='#566470' stroke-width='.9'/>"
+ "<ellipse cx='28.6' cy='31.5' rx='2.1' ry='5.2' transform='rotate(-14 28.6 31.5)' fill='#27323a'/>"
+ "<ellipse cx='35.4' cy='31.5' rx='2.1' ry='5.2' transform='rotate(14 35.4 31.5)' fill='#27323a'/>"
+ "<g stroke='#4cc2b0' stroke-width='2.4' stroke-linecap='round'><path d='M7 33H14M50 33H57M32 7V12M32 54V57'/></g>"
+ "<circle cx='32' cy='33' r='2' fill='#f2b84b'/></svg>")
+import urllib.parse as _up
+LOGO_URI='data:image/svg+xml,'+_up.quote(LOGO_SVG,safe=":/=' ")
+for f in ('index.html','DICOM_Goruntuleyici.html'):
+    t=open(o+f,encoding='utf-8').read()
+    assert t.count('LOGO_DATA_URI')==2
+    open(o+f,'w',encoding='utf-8').write(t.replace('LOGO_DATA_URI',LOGO_URI))
+def icon(size,full):
+    """full=True: maskable (kenarsız zemin, içerik güvenli bölgede)"""
+    S=size*4;im=Image.new('RGBA',(S,S),(0,0,0,0))
+    bg=Image.new('RGBA',(S,S));gd=ImageDraw.Draw(bg)
+    for y in range(S):
+        k=y/(S-1);gd.line([(0,y),(S,y)],fill=(int(27+(10-27)*k),int(75+(19-75)*k),int(85+(23-85)*k),255))
+    mask=Image.new('L',(S,S),0);md=ImageDraw.Draw(mask)
+    if full:md.rectangle([0,0,S,S],fill=255)
+    else:md.rounded_rectangle([0,0,S-1,S-1],radius=int(S*14/64),fill=255)
+    im.paste(bg,(0,0),mask)
+    g=ImageDraw.Draw(im)
+    sc=(S/64)*(0.78 if full else 1.0);ox=S/2-32*sc;oy=S/2-32*sc
+    X=lambda v:ox+v*sc;Y=lambda v:oy+v*sc
+    def ell(cx,cy,rx,ry,fill):g.ellipse([X(cx-rx),Y(cy-ry),X(cx+rx),Y(cy+ry)],fill=fill)
+    ell(32,33,15.5,18.5,(238,243,246,255))
+    # beyin: içten dışa koyulaşan katmanlar
+    for i in range(24):
+        k=i/23;c=(int(108+(179-108)*k),int(122+(190-122)*k),int(133+(199-133)*k),255)
+        ell(32,33-1.2*k,12.6*(1-0.55*k),15.6*(1-0.55*k),c)
+    g.line([X(32),Y(18.5),X(32),Y(47.5)],fill=(86,100,112,255),width=max(1,int(.9*sc)))
+    for cx,ang in ((28.6,-14),(35.4,14)):
+        v=Image.new('RGBA',(S,S),(0,0,0,0));vd=ImageDraw.Draw(v)
+        vd.ellipse([X(cx-2.1),Y(31.5-5.2),X(cx+2.1),Y(31.5+5.2)],fill=(39,50,58,255))
+        v=v.rotate(-ang,center=(X(cx),Y(31.5)),resample=Image.BICUBIC);im.alpha_composite(v);g=ImageDraw.Draw(im)
+    w=max(2,int(2.4*sc));ac=(76,194,176,255)
+    for (x1,y1,x2,y2) in ((7,33,14,33),(50,33,57,33),(32,7,32,12),(32,54,32,57)):
+        g.line([X(x1),Y(y1),X(x2),Y(y2)],fill=ac,width=w)
+        for (px,py) in ((x1,y1),(x2,y2)):g.ellipse([X(px)-w/2,Y(py)-w/2,X(px)+w/2,Y(py)+w/2],fill=ac)
+    ell(32,33,2,2,(242,184,75,255))
     return im.resize((size,size),Image.LANCZOS)
-icon(192,.14,True).save(o+'icon-192.png');icon(512,.14,True).save(o+'icon-512.png');icon(512,.24,False).save(o+'icon-maskable.png')
+icon(192,False).save(o+'icon-192.png');icon(512,False).save(o+'icon-512.png');icon(512,True).save(o+'icon-maskable.png')
 print('site hazır',ver,url or '(adres yok)',len(html)//1024,'KB')

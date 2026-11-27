@@ -631,18 +631,41 @@ function goMarker(s,m){
     setStatus(`${shortName(s)} · ${m.name}`);
   }catch(err){setStatus('Seri açılamadı: '+err.message,true);}
 }
-/* --- masaüstünde görüntü alanını pencere yüksekliğine sığdır (kaydırma gerekmesin) --- */
+/* --- masaüstünde tüm sayfa pencereye sığar (kaydırma gerekmez). Telefon düzenine dokunmaz --- */
+const DESK=matchMedia('(min-width:721px) and (hover:hover),(min-width:721px) and (min-height:521px)');
 function fitHeights(){
   const de=document.documentElement;
-  if(!matchMedia('(min-width:721px)').matches){de.style.removeProperty('--vh');return;}
+  if(!DESK.matches){de.style.removeProperty('--vh');return;}
   const el=$('#grid').hidden?$('#views'):$('#grid');
-  const top=el.getBoundingClientRect().top+(window.scrollY||0);
-  const h=Math.max(320,Math.floor(innerHeight-top-14));
-  if(de.style.getPropertyValue('--vh')!==h+'px')de.style.setProperty('--vh',h+'px');
+  const cur=el.getBoundingClientRect().height;
+  const ft=$('#foot'),pb=parseFloat(getComputedStyle(document.body).paddingBottom)||0;
+  const bottom=(ft?ft.getBoundingClientRect().bottom:el.getBoundingClientRect().bottom)+pb;
+  const h=Math.max(160,Math.floor(cur-(bottom-innerHeight)));
+  if(Math.abs(cur-h)>1||!de.style.getPropertyValue('--vh'))de.style.setProperty('--vh',h+'px');
 }
 addEventListener('resize',fitHeights);addEventListener('load',fitHeights);
-if(typeof ResizeObserver!=='undefined'){const ro=new ResizeObserver(fitHeights);['.top','#toolrow','#adv'].forEach(s=>{const e=document.querySelector(s);if(e)ro.observe(e);});}
+if(typeof ResizeObserver!=='undefined'){const ro=new ResizeObserver(()=>requestAnimationFrame(fitHeights));['.top','#toolrow','#adv','#foot','.probe'].forEach(s=>{const e=document.querySelector(s);if(e)ro.observe(e);});}
 fitHeights();
+/* --- masaüstünde İşaretler / Etiketler yan paneli --- */
+(function(){
+  const btn=$('#mkBtn'),side=$('#side'),all=$('#allMk'),home=all&&all.parentNode,after=all&&all.nextSibling;if(!btn||!side)return;
+  const set=o=>{document.body.classList.toggle('sideOpen',o);btn.setAttribute('aria-expanded',o);};
+  btn.addEventListener('click',()=>set(!document.body.classList.contains('sideOpen')));
+  $('#sideX').addEventListener('click',()=>set(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('sideOpen')&&[...document.querySelectorAll('.welcome')].every(w=>w.hidden))set(false);});
+  /* tüm işaretler listesi masaüstünde panelin içine taşınır, telefonda eski yerinde kalır */
+  const place=()=>{
+    if(!all)return;
+    if(DESK.matches){if(all.parentNode!==$('#tabMarks'))$('#tabMarks').appendChild(all);}
+    else{set(false);if(all.parentNode!==home)home.insertBefore(all,after);}
+    fitHeights();
+  };
+  (DESK.addEventListener?DESK.addEventListener('change',place):DESK.addListener(place));place();
+  /* düğmedeki sayı: tüm serilerdeki işaret sayısı */
+  const cnt=()=>{const n=+($('#amN').textContent||0)||+($('#mkN').textContent||0)||0;$('#mkBtnN').textContent=n?String(n):'';};
+  if(typeof MutationObserver!=='undefined')['#amN','#mkN'].forEach(q=>{const e=$(q);if(e)new MutationObserver(cnt).observe(e,{childList:true,characterData:true,subtree:true});});
+  cnt();
+})();
 /* --- açı skalası düğmeleri --- */
 (function(){
   try{const d=localStorage.getItem('dicomAngDev');if(d==='elekta'||d==='varian')S.angDev=d;}catch(_){}

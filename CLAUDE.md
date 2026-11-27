@@ -21,7 +21,9 @@ Sürüm yayınlama: derle, commit, push. İsteğe bağlı olarak `gh release cre
 - Tek dosya (file://) güncellemesi `p3d_update.js` içindeki `fileUpdater()`: yayın adresindeki `version.json` (sürüm ve `date`) okunur, yeni sürüm varsa `DICOM_Goruntuleyici.html` indirilip `DICOM GÖRÜNTÜLEYİCİ_GG.AA.YYYY_V.n.html` adıyla kaydedilir. Otomatik kontrol yalnızca açılıştan sonraki ilk 1 dakikada yapılır (15 sn arayla), sonra yalnızca Güncelle düğmesiyle. Otomatik kontrol yeni sürüm bulursa indirmeden önce bir kez sorar (`#updAsk`). İnternet yoksa düğmenin yanında Çevrimdışısınız yazar (`setNetOff`).
 - Sağ altta yayın tarihi ve sürüm yazar (`BUILD_DATE`, make_site.py doldurur).
 - Yenilikler penceresi (`NEWS`, `#news`): her sürümde 6 dilde yeniden yazılır, karşılamadan önce açılır. "Bir daha gösterme" işaretlenirse `localStorage.dicomNewsHide` o sürüme eşitlenir ve o sürüm için açılmaz.
-- Masaüstünde görünüm pencereye sığar (`--vh`, `fitHeights()`), mobil sınır 720 px.
+- Masaüstünde tüm sayfa pencereye sığar, kaydırma olmaz (`--vh`, `fitHeights()` alt bilginin altını pencere altına eşitler). Masaüstü koşulu `DESK` = `(min-width:721px) and (hover:hover),(min-width:721px) and (min-height:521px)`. Telefon düzenine (≤720 px ya da dokunmatik yatay ≤520 px yükseklik) dokunulmaz.
+- Masaüstünde İşaretler/Etiketler paneli (`#side`) sabit yan paneldir, araç çubuğundaki `#mkBtn` ile açılır, `#sideX` ve Esc ile kapanır. Tüm işaretler listesi (`#allMk`) masaüstünde panelin içine taşınır, telefonda eski yerinde kalır. Düğmedeki sayı tüm işaret sayısıdır.
+- Simge: `make_site.py` içindeki `LOGO_SVG` (başlık logosu ve sekme simgesi, HTML'e data URI olarak gömülür) ve `icon()` (PNG simgeler). İkisi aynı çizimdir: koyu camgöbeği zemin, aksiyel beyin kesiti, nişangâh.
 
 ## Test
 Playwright (chromium) ile denendi: dil taraması (Türkçe artık metin, taşma, konsol hatası), ZIP/klasör yükleme, ızgara, füzyon, işaret, açı, seri kapatma, ilk görünüm, görüntüleri kaldırma, mobil taklit, çevrimdışı ve V.1→V.2 güncelleme. Gerçek telefonlarda ve gerçek hasta verisinde denenmedi.
