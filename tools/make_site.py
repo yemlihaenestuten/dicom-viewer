@@ -15,7 +15,7 @@ html=re.sub(r"const VER='[^']*';","const VER='%s';"%ver,html)
 html=html.replace("const UPDATE_URL='';","const UPDATE_URL=%s;"%json.dumps(url))
 open(o+'index.html','w',encoding='utf-8').write(html)
 open(o+'DICOM_Goruntuleyici.html','w',encoding='utf-8').write(html)
-open(o+'version.json','w').write(json.dumps({'version':ver,'name':'DICOM Görüntüleyici'},ensure_ascii=False)+'\n')
+open(o+'version.json','w').write(json.dumps({'version':ver,'date':__import__('datetime').date.today().isoformat(),'name':'DICOM Görüntüleyici'},ensure_ascii=False)+'\n')
 open(o+'sw.js','w',encoding='utf-8').write("""/* DICOM Görüntüleyici: çevrimdışı önbellek. Sürüm değişince bu dosya da değişir. */
 const VERSION='%s';
 const CACHE='dicom-viewer-'+VERSION;

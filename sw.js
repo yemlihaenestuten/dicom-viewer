@@ -1,5 +1,5 @@
 /* DICOM Görüntüleyici: çevrimdışı önbellek. Sürüm değişince bu dosya da değişir. */
-const VERSION='V.1';
+const VERSION='V.2';
 const CACHE='dicom-viewer-'+VERSION;
 const FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable.png'];
 self.addEventListener('install',e=>{

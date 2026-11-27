@@ -1,6 +1,6 @@
 /* ---------- Dil desteği: Türkçe (varsayılan), İngilizce, Almanca, Korece, Japonca, Rusça ---------- */
 /* Kaynak metinler Türkçedir. TX() tam eşleşme arar, bulamazsa ifade kalıplarını (PHR) uygular. */
-const VER='V.1';
+const VER='V.2';
 const UPDATE_URL='';/* yayın adresi (GitHub Pages) */
 const UPD_FILE=location.protocol==='file:';
 const LANGS=['en','de','ko','ja','ru'];
@@ -226,11 +226,12 @@ const EXACT_ROWS=[
  ["Seri kapatıldı. İşaretleri alttaki listede kaldı.", "Series closed. Its markers remain in the list below.", "Serie geschlossen. Ihre Markierungen bleiben in der Liste unten.", "시리즈를 닫았습니다. 마커는 아래 목록에 남아 있습니다.", "シリーズを閉じました。マーカーは下のリストに残っています。", "Серия закрыта. Её метки остались в списке ниже."],
  ["Güncelle", "Update", "Aktualisieren", "업데이트", "更新", "Обновить"],
  ["Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır", "Checks whether a new version exists. If so, it downloads it and reloads the program. Needs internet. After the update the program works offline again", "Prüft, ob eine neue Version vorliegt. Falls ja, wird sie heruntergeladen und das Programm neu geladen. Internet erforderlich. Nach dem Update läuft das Programm wieder offline", "새 버전이 있는지 확인합니다. 있으면 다운로드하여 프로그램을 새로 고칩니다. 인터넷이 필요하며 업데이트 후에는 다시 오프라인으로 사용할 수 있습니다", "新しいバージョンがあるか確認します。ある場合はダウンロードしてプログラムを再読み込みします。インターネット接続が必要で、更新後は再びオフラインで使えます", "Проверяет, есть ли новая версия. Если есть, скачивает её и перезагружает программу. Нужен интернет. После обновления программа снова работает офлайн"],
- ["Programın güncel sürümünü web adresinden yeni sekmede açar. Oradan ana ekrana ekleyip çevrimdışı kullanabilirsiniz", "Opens the current version of the program from its web address in a new tab. From there you can add it to the home screen and use it offline", "Öffnet die aktuelle Programmversion von der Webadresse in einem neuen Tab. Dort können Sie sie zum Startbildschirm hinzufügen und offline nutzen", "프로그램의 최신 버전을 웹 주소에서 새 탭으로 엽니다. 그곳에서 홈 화면에 추가하여 오프라인으로 사용할 수 있습니다", "プログラムの最新バージョンをWebアドレスから新しいタブで開きます。そこからホーム画面に追加してオフラインで使えます", "Открывает актуальную версию программы по веб-адресу в новой вкладке. Оттуда её можно добавить на главный экран и использовать офлайн"],
+ ["Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder", "Checks whether a new version exists. If so, it downloads and saves the new HTML file. Needs internet. The program also checks once by itself during the first minute after opening", "Prüft, ob eine neue Version vorliegt. Falls ja, wird die neue HTML-Datei heruntergeladen und gespeichert. Internet erforderlich. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst einmal", "새 버전이 있는지 확인합니다. 있으면 새 HTML 파일을 다운로드하여 저장합니다. 인터넷이 필요합니다. 프로그램을 연 후 처음 1분 동안 프로그램이 스스로도 한 번 확인합니다", "新しいバージョンがあるか確認します。ある場合は新しいHTMLファイルをダウンロードして保存します。インターネット接続が必要です。起動後の最初の1分間はプログラム自身も一度確認します", "Проверяет, есть ли новая версия. Если есть, скачивает и сохраняет новый HTML-файл. Нужен интернет. В первую минуту после запуска программа также один раз проверяет сама"],
  ["Sürüm kontrol ediliyor.", "Checking the version.", "Version wird geprüft.", "버전을 확인하는 중입니다.", "バージョンを確認中です。", "Проверка версии."],
  ["Yeni sürüm indiriliyor.", "Downloading the new version.", "Die neue Version wird heruntergeladen.", "새 버전을 다운로드하는 중입니다.", "新しいバージョンをダウンロード中です。", "Скачивается новая версия."],
  ["Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.", "You are offline. Updating needs an internet connection. The program keeps working with the current version.", "Sie sind offline. Für das Update ist eine Internetverbindung nötig. Das Programm läuft mit der aktuellen Version weiter.", "오프라인 상태입니다. 업데이트에는 인터넷 연결이 필요합니다. 프로그램은 현재 버전으로 계속 작동합니다.", "オフラインです。更新にはインターネット接続が必要です。プログラムは現在のバージョンで引き続き動作します。", "Нет подключения к интернету. Для обновления нужен интернет. Программа продолжает работать в текущей версии."],
  ["Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.", "Could not get the version information. Check your internet connection.", "Die Versionsinformation konnte nicht abgerufen werden. Prüfen Sie die Internetverbindung.", "버전 정보를 가져올 수 없습니다. 인터넷 연결을 확인하세요.", "バージョン情報を取得できませんでした。インターネット接続を確認してください。", "Не удалось получить сведения о версии. Проверьте подключение к интернету."],
+ ["Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.", "The update could not be downloaded. Check your internet connection.", "Das Update konnte nicht heruntergeladen werden. Prüfen Sie die Internetverbindung.", "업데이트를 다운로드할 수 없습니다. 인터넷 연결을 확인하세요.", "更新をダウンロードできませんでした。インターネット接続を確認してください。", "Не удалось скачать обновление. Проверьте подключение к интернету."],
  ["Güncelleme tamamlanamadı. Sayfayı yenileyip tekrar deneyin.", "The update could not be completed. Reload the page and try again.", "Das Update konnte nicht abgeschlossen werden. Laden Sie die Seite neu und versuchen Sie es erneut.", "업데이트를 완료할 수 없습니다. 페이지를 새로 고친 후 다시 시도하세요.", "更新を完了できませんでした。ページを再読み込みしてもう一度お試しください。", "Не удалось завершить обновление. Обновите страницу и повторите попытку."],
 ];
 const EXACT={};LANGS.forEach(l=>{EXACT[l]={};});
@@ -303,6 +304,10 @@ const PHR_ROWS=[
  [lit("Aksiyel"),"Axial","Axial","축상","アキシャル","Аксиальная"],
  [lit("Koronal"),"Coronal","Koronar","관상","コロナル","Корональная"],
  [lit("Program güncel. Sürüm: "),"The program is up to date. Version: ","Das Programm ist aktuell. Version: ","프로그램이 최신 상태입니다. 버전: ","プログラムは最新です。バージョン：","Программа обновлена. Версия: "],
+ [lit("Yeni sürüm bulundu: "),"New version found: ","Neue Version gefunden: ","새 버전 발견: ","新しいバージョンが見つかりました：","Найдена новая версия: "],
+ [lit(". İndiriliyor."),". Downloading.",". Wird heruntergeladen.",". 다운로드하는 중입니다.","。ダウンロード中です。",". Скачивается."],
+ [lit("Yeni sürüm kaydedildi: "),"New version saved: ","Neue Version gespeichert: ","새 버전 저장됨: ","新しいバージョンを保存しました：","Новая версия сохранена: "],
+ [lit(". Dosyayı İndirilenler klasöründen açın. İndirme başlamadıysa Güncelle düğmesine tekrar basın."),". Open the file from your Downloads folder. If the download did not start, press the Update button again.",". Öffnen Sie die Datei aus dem Download-Ordner. Falls der Download nicht begonnen hat, drücken Sie erneut auf Aktualisieren.",". 다운로드 폴더에서 파일을 여세요. 다운로드가 시작되지 않았다면 업데이트 버튼을 다시 누르세요.","。ダウンロードフォルダーからファイルを開いてください。ダウンロードが始まらない場合は更新ボタンをもう一度押してください。",". Откройте файл из папки «Загрузки». Если загрузка не началась, нажмите кнопку «Обновить» ещё раз."],
  [lit("Yeni sürüm hazır: "),"New version ready: ","Neue Version bereit: ","새 버전 준비됨: ","新しいバージョンの準備ができました：","Новая версия готова: "],
  [lit(". Yüklü görüntüler kapanacak. Güncellemek için düğmeye tekrar basın."),". Loaded images will be closed. Press the button again to update.",". Geladene Bilder werden geschlossen. Zum Aktualisieren die Schaltfläche erneut drücken.",". 불러온 이미지가 닫힙니다. 업데이트하려면 버튼을 다시 누르세요.","。読み込んだ画像は閉じられます。更新するにはもう一度ボタンを押してください。",". Загруженные изображения будут закрыты. Для обновления нажмите кнопку ещё раз."],
 ];
@@ -323,7 +328,7 @@ function TX(s){
 
 /* ---------- karşılama penceresi ve alt bilgi (dile göre) ---------- */
 const WELCOME={
-tr:{title:'DICOM GÖRÜNTÜLEYİCİ',sub:'V.1 · Tomografi, MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosyalık program. Kurulum ve internet gerekmez.',btn:'Anladım, başla',
+tr:{title:'DICOM GÖRÜNTÜLEYİCİ',sub:VER+' · Tomografi, MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosyalık program. Kurulum ve internet gerekmez.',btn:'Anladım, başla',
 sign:`Medikal Fizik Uzmanı Yemliha Enes Tüten tarafından geliştirilmiştir. Açık kaynaktır, ücretsiz kullanabilirsiniz. İletişim: <a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>Nerelerde çalışır</h3>
 <p>Windows, Mac, Android telefon ve tablet, iPhone ve iPad. Chrome, Safari, Edge ve Firefox ile açılır.</p>
@@ -352,7 +357,7 @@ body:`<h3>Nerelerde çalışır</h3>
 <li>Türkçe, İngilizce, Almanca, Korece, Japonca ve Rusça arayüz sunar.</li>
 <li><b>Açı</b> düğmesi tüm kesitlerin kenarında 0-360° açı skalasını gösterir. Cihaz listesinden Varian (180° altta) ya da Elekta (0° altta) seçilir.</li>
 <li>Fareyle bir düğmenin üstüne gelince ne işe yaradığını yazar. <b>İlk görünüm</b> düğmesi ekranı dosya ilk yüklendiğinde tüm serilerin ayrı kutularda açıldığı haline döndürür.</li>
-<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Web adresinden açıldığında sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir.</li>
+<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar.</li>
 </ul>
 <h3>Bilmeniz gerekenler</h3>
 <ul>
@@ -360,7 +365,7 @@ body:`<h3>Nerelerde çalışır</h3>
 <li>Tanı koymak için değil yalnızca inceleme amaçlıdır. Yorum için doktorunuza danışın.</li>
 <li>iPhone ve iPad'de dosyaya Dosyalar uygulamasında dokunursanız önizleme açılır ve görüntüler okunmaz. Dosyayı Safari ya da Chrome ile açın.</li>
 </ul>`},
-en:{title:'DICOM VIEWER',sub:'V.1 · A single-file program that opens CT, MR, X-ray and PET images in the browser. No installation or internet needed.',btn:'Got it, start',
+en:{title:'DICOM VIEWER',sub:VER+' · A single-file program that opens CT, MR, X-ray and PET images in the browser. No installation or internet needed.',btn:'Got it, start',
 sign:`Developed by Yemliha Enes Tüten, Medical Physics Expert. Open source and free to use. Contact: <a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>Where it works</h3>
 <p>Windows, Mac, Android phones and tablets, iPhone and iPad. It opens in Chrome, Safari, Edge and Firefox.</p>
@@ -389,7 +394,7 @@ body:`<h3>Where it works</h3>
 <li>Offers the interface in Turkish, English, German, Korean, Japanese and Russian.</li>
 <li>The <b>Angle</b> button shows a 0-360° angle scale around the edges of every view. Choose Varian (180° at the bottom) or Elekta (0° at the bottom) from the device list.</li>
 <li>Hovering over a button with the mouse shows what it does. The <b>Initial view</b> button returns the screen to the layout shown when the file was first loaded, with all series open in separate cells.</li>
-<li>Works offline both as a single file and from a web address. When opened from a web address, the <b>Update</b> button at the bottom of the page downloads the new version.</li>
+<li>Works offline both as a single file and from a web address. The <b>Update</b> button at the bottom of the page downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself.</li>
 </ul>
 <h3>Good to know</h3>
 <ul>
@@ -397,7 +402,7 @@ body:`<h3>Where it works</h3>
 <li>For review only, not for diagnosis. Consult your physician for interpretation.</li>
 <li>On iPhone and iPad, tapping the file in the Files app opens a preview and the images cannot be read. Open the file with Safari or Chrome.</li>
 </ul>`},
-de:{title:'DICOM-BETRACHTER',sub:'V.1 · Ein Ein-Datei-Programm, das CT-, MR-, Röntgen- und PET-Bilder im Browser öffnet. Keine Installation und kein Internet nötig.',btn:'Verstanden, los',
+de:{title:'DICOM-BETRACHTER',sub:VER+' · Ein Ein-Datei-Programm, das CT-, MR-, Röntgen- und PET-Bilder im Browser öffnet. Keine Installation und kein Internet nötig.',btn:'Verstanden, los',
 sign:`Entwickelt von Yemliha Enes Tüten, Medizinphysik-Experte. Open Source und kostenlos nutzbar. Kontakt: <a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>Wo es funktioniert</h3>
 <p>Windows, Mac, Android-Handys und -Tablets, iPhone und iPad. Es öffnet sich in Chrome, Safari, Edge und Firefox.</p>
@@ -426,7 +431,7 @@ body:`<h3>Wo es funktioniert</h3>
 <li>Bietet die Oberfläche auf Türkisch, Englisch, Deutsch, Koreanisch, Japanisch und Russisch.</li>
 <li>Die Schaltfläche <b>Winkel</b> zeigt am Rand jeder Ansicht eine Winkelskala von 0 bis 360°. In der Geräteliste wählen Sie Varian (180° unten) oder Elekta (0° unten).</li>
 <li>Beim Überfahren einer Schaltfläche mit der Maus wird angezeigt, was sie tut. Die Schaltfläche <b>Ausgangsansicht</b> stellt die Ansicht wie beim ersten Laden der Datei wieder her, mit allen Serien in getrennten Feldern.</li>
-<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Wird es von einer Webadresse geöffnet, lädt die Schaltfläche <b>Aktualisieren</b> unten auf der Seite die neue Version herunter.</li>
+<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> unten auf der Seite lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version.</li>
 </ul>
 <h3>Gut zu wissen</h3>
 <ul>
@@ -434,7 +439,7 @@ body:`<h3>Wo es funktioniert</h3>
 <li>Nur zur Ansicht, nicht zur Diagnose. Lassen Sie sich die Befunde von Ihrem Arzt erklären.</li>
 <li>Tippen Sie auf iPhone und iPad in der Dateien-App auf die Datei, öffnet sich eine Vorschau und die Bilder werden nicht gelesen. Öffnen Sie die Datei mit Safari oder Chrome.</li>
 </ul>`},
-ko:{title:"DICOM 뷰어",sub:"V.1 · CT, MR, X선, PET 영상을 브라우저에서 여는 단일 파일 프로그램입니다. 설치와 인터넷이 필요 없습니다.",btn:"확인, 시작하기",
+ko:{title:"DICOM 뷰어",sub:VER+" · CT, MR, X선, PET 영상을 브라우저에서 여는 단일 파일 프로그램입니다. 설치와 인터넷이 필요 없습니다.",btn:"확인, 시작하기",
 sign:`의학물리 전문가 Yemliha Enes Tüten이 개발했습니다. 오픈 소스이며 무료로 사용할 수 있습니다. 문의: <a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>사용 가능한 환경</h3>
 <p>Windows, Mac, Android 휴대폰과 태블릿, iPhone과 iPad. Chrome, Safari, Edge, Firefox에서 열립니다.</p>
@@ -463,7 +468,7 @@ body:`<h3>사용 가능한 환경</h3>
 <li>터키어, 영어, 독일어, 한국어, 일본어, 러시아어 인터페이스를 제공합니다.</li>
 <li><b>각도</b> 버튼은 모든 화면의 가장자리에 0–360° 각도 눈금을 표시합니다. 장비 목록에서 Varian(180° 아래) 또는 Elekta(0° 아래)를 선택하세요.</li>
 <li>마우스를 버튼 위에 올리면 기능 설명이 표시됩니다. <b>초기 화면</b> 버튼은 파일을 처음 불러왔을 때의 화면, 즉 모든 시리즈가 개별 칸에 열린 상태로 되돌립니다.</li>
-<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 웹 주소에서 열면 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다.</li>
+<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인합니다.</li>
 </ul>
 <h3>알아 두세요</h3>
 <ul>
@@ -471,7 +476,7 @@ body:`<h3>사용 가능한 환경</h3>
 <li>진단용이 아니라 열람용입니다. 해석은 담당 의사와 상의하세요.</li>
 <li>iPhone과 iPad에서 파일 앱의 파일을 탭하면 미리보기가 열려 이미지를 읽을 수 없습니다. 파일을 Safari 또는 Chrome으로 여세요.</li>
 </ul>`},
-ja:{title:"DICOM ビューア",sub:"V.1 · CT、MR、X線、PET画像をブラウザで開く単一ファイルのプログラムです。インストールもインターネットも不要です。",btn:"了解、開始",
+ja:{title:"DICOM ビューア",sub:VER+" · CT、MR、X線、PET画像をブラウザで開く単一ファイルのプログラムです。インストールもインターネットも不要です。",btn:"了解、開始",
 sign:`医学物理専門家 Yemliha Enes Tüten が開発しました。オープンソースで無料でご利用いただけます。連絡先：<a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>動作環境</h3>
 <p>Windows、Mac、Androidのスマートフォンとタブレット、iPhone、iPad。Chrome、Safari、Edge、Firefoxで開けます。</p>
@@ -500,7 +505,7 @@ body:`<h3>動作環境</h3>
 <li>トルコ語、英語、ドイツ語、韓国語、日本語、ロシア語のインターフェースに対応しています。</li>
 <li><b>角度</b>ボタンは、すべてのビューの端に0〜360°の角度目盛りを表示します。装置のリストからVarian（180°が下）またはElekta（0°が下）を選択します。</li>
 <li>ボタンにマウスを重ねると、その機能が表示されます。<b>初期表示</b>ボタンは、ファイルを最初に読み込んだときの表示、つまりすべてのシリーズが別々のセルに開いた状態に戻します。</li>
-<li>単一ファイルでもWebアドレスからでもオフラインで動作します。Webアドレスから開いた場合、ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。</li>
+<li>単一ファイルでもWebアドレスからでもオフラインで動作します。ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認します。</li>
 </ul>
 <h3>ご注意</h3>
 <ul>
@@ -508,7 +513,7 @@ body:`<h3>動作環境</h3>
 <li>診断用ではなく閲覧専用です。読影・解釈は医師にご相談ください。</li>
 <li>iPhoneとiPadで「ファイル」アプリのファイルをタップするとプレビューが開き、画像を読み込めません。ファイルはSafariまたはChromeで開いてください。</li>
 </ul>`},
-ru:{title:"DICOM-ПРОСМОТРЩИК",sub:"V.1 · Программа в одном файле, открывающая изображения КТ, МРТ, рентгена и ПЭТ в браузере. Установка и интернет не нужны.",btn:"Понятно, начать",
+ru:{title:"DICOM-ПРОСМОТРЩИК",sub:VER+" · Программа в одном файле, открывающая изображения КТ, МРТ, рентгена и ПЭТ в браузере. Установка и интернет не нужны.",btn:"Понятно, начать",
 sign:`Разработал Yemliha Enes Tüten, специалист по медицинской физике. Открытый исходный код, бесплатное использование. Контакты: <a href="mailto:${MAIL}">${MAIL}</a>`,
 body:`<h3>Где работает</h3>
 <p>Windows, Mac, телефоны и планшеты Android, iPhone и iPad. Открывается в Chrome, Safari, Edge и Firefox.</p>
@@ -537,7 +542,7 @@ body:`<h3>Где работает</h3>
 <li>Интерфейс доступен на турецком, английском, немецком, корейском, японском и русском языках.</li>
 <li>Кнопка <b>Угол</b> показывает шкалу углов 0–360° по краям всех изображений. В списке аппаратов выберите Varian (180° внизу) или Elekta (0° внизу).</li>
 <li>При наведении мыши на кнопку показывается, для чего она нужна. Кнопка <b>Исходный вид</b> возвращает экран к виду при первой загрузке файла: все серии открыты в отдельных ячейках.</li>
-<li>Работает офлайн и как отдельный файл, и по веб-адресу. При открытии по веб-адресу кнопка <b>Обновить</b> внизу страницы скачивает новую версию.</li>
+<li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> внизу страницы скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии.</li>
 </ul>
 <h3>Важно знать</h3>
 <ul>
@@ -561,7 +566,7 @@ function fillWelcome(){
 function fillFooter(){
   const f=FOOT[LANG],ub=$('#updBtn');
   $('#foot').innerHTML=`${esc(f[0])}\n  <span class="only-mouse">${esc(f[1])}</span>\n  <span class="only-touch">${esc(f[2])}</span>\n  <div class="credit"><span>${esc(TX('Medikal Fizik Uzmanı'))}</span> Yemliha Enes TÜTEN <span class="ver">· ${VER}</span></div>`;
-  if(ub){const c=$('#foot .credit');if(c)c.appendChild(ub);ub.textContent=TX('Güncelle');ub.title=TX(UPD_FILE?'Programın güncel sürümünü web adresinden yeni sekmede açar. Oradan ana ekrana ekleyip çevrimdışı kullanabilirsiniz':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
+  if(ub){const c=$('#foot .credit');if(c)c.appendChild(ub);ub.textContent=TX('Güncelle');ub.title=TX(UPD_FILE?'Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
 }
 
 const TIPS=[

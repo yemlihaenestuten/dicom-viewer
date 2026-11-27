@@ -18,6 +18,7 @@ Sürüm yayınlama: derle, commit, push. `sw.js` içindeki sürüm değiştiği 
 - İşaret yalnızca konulduğu kesitte görünür. İşaretler seri kapansa da altta listelenir.
 - Dosya seçme ve klasör seçme ayrı düğmelerdir (ZIP ekle, Klasör ekle).
 - Düğmelerde fare üzerine gelince açıklama (title/tooltip) çıkar. Yeni düğmeye `TIPS` listesine açıklama eklenir.
+- Tek dosya (file://) güncellemesi `p3d_update.js` içindeki `fileUpdater()`: yayın adresindeki `version.json` (sürüm ve `date`) okunur, yeni sürüm varsa `DICOM_Goruntuleyici.html` indirilip `DICOM GÖRÜNTÜLEYİCİ_GG.AA.YYYY_V.n.html` adıyla kaydedilir. Otomatik kontrol yalnızca açılıştan sonraki ilk 1 dakikada yapılır (15 sn arayla), sonra yalnızca Güncelle düğmesiyle.
 - Masaüstünde görünüm pencereye sığar (`--vh`, `fitHeights()`), mobil sınır 720 px.
 
 ## Test
