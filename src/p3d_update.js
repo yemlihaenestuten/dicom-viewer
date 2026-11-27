@@ -16,7 +16,7 @@
     });
   }
   function ready(ver){
-    btn.classList.add('ready');
+    btn.classList.add('ready');setUpdState('new');
     setStatus('Yeni sürüm hazır: '+ver+'. Yüklü görüntüler kapanacak. Güncellemek için düğmeye tekrar basın.');
   }
   async function check(silent){
@@ -29,8 +29,8 @@
       j=await r.json();
     }catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
     setNetOff(false);
-    if(!j||!j.version||j.version===VER){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
-    if(!silent)setStatus('Yeni sürüm indiriliyor.');
+    if(!j||!j.version||j.version===VER){setUpdState('ok');if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
+    setUpdState('new');if(!silent)setStatus('Yeni sürüm indiriliyor.');
     try{
       await reg.update();
       waiting=reg.waiting||await waitInstalled(reg.installing);
@@ -98,7 +98,7 @@ function fileUpdater(btn){
   }
   /* silent: otomatik kontrol. Ağ hatasında false döner (yeniden denenebilir). */
   function ask(j){
-    asked=true;pending=j;btn.classList.add('ready');
+    asked=true;pending=j;btn.classList.add('ready');setUpdState('new');
     const A=document.getElementById('updAsk');
     document.getElementById('uaText').textContent='Yeni sürüm yayınlandı: '+fdate(j.date)+' · '+j.version+'. İndirmek ister misiniz?';
     A.hidden=false;document.getElementById('uaYes').focus();
@@ -118,7 +118,8 @@ function fileUpdater(btn){
     let j;
     try{j=await getJSON();}catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
     setNetOff(false);
-    if(!j||!j.version||num(j.version)<=num(VER)){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    if(!j||!j.version||num(j.version)<=num(VER)){setUpdState('ok');if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    setUpdState('new');
     if(silent){if(!asked)ask(j);return true;}   /* otomatik kontrolde yalnızca bir kez sorulur */
     try{await download(j);}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);return false;}
     return true;

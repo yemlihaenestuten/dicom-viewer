@@ -155,6 +155,7 @@ footer{display:flex;flex-direction:column;gap:6px}
 .upd{font:inherit;font-size:11px;font-weight:600;margin-left:8px;padding:1px 9px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--accent);cursor:pointer;vertical-align:baseline}
 .upd:hover{border-color:var(--accent)}
 .upd.ready{background:var(--accent);color:#06201c;border-color:var(--accent)}
+.upd.ok{color:var(--mute)}
 .upd[disabled]{opacity:.6;cursor:default}
 .offl{margin-left:8px;padding:1px 8px;border-radius:10px;border:1px solid var(--mark);color:var(--mark);font-size:11px;font-weight:600}
 .offl[hidden]{display:none}
@@ -261,6 +262,8 @@ footer{display:flex;flex-direction:column;gap:6px}
 }
 /* ---- masaüstü: tek sayfa, kaydırma yok. İşaretler ve etiketler yan panelde (telefon düzeni değişmez) ---- */
 #mkBtn,.sideX{display:none}
+.brand .upd{font-size:12px;padding:3px 11px;margin-left:6px;align-self:center}
+.brand .offl{align-self:center}
 #mkBtn .cnt:not(:empty){margin-left:6px;min-width:20px;padding:0 6px;border-radius:10px;background:var(--mark);color:#241a05;font-size:11px;font-weight:700;line-height:18px;text-align:center}
 #mkBtn[aria-expanded=true]{border-color:var(--accent);color:var(--accent);background:#10211f}
 @media(min-width:721px) and (hover:hover),(min-width:721px) and (min-height:521px){
@@ -664,6 +667,8 @@ const EXACT_ROWS=[
  ["İşaretler, ölçümler ve DICOM etiketleri panelini açar ya da kapatır", "Opens or closes the panel with markers, measurements and DICOM tags", "Öffnet oder schließt das Feld mit Markierungen, Messungen und DICOM-Tags", "마커, 측정값, DICOM 태그 패널을 열거나 닫습니다", "マーカー、計測、DICOMタグのパネルを開閉します", "Открывает или закрывает панель меток, измерений и DICOM-тегов"],
  ["Paneli kapatır", "Closes the panel", "Schließt das Feld", "패널을 닫습니다", "パネルを閉じます", "Закрывает панель"],
  ["İşaretler ve etiketler", "Markers and tags", "Markierungen und Tags", "마커와 태그", "マーカーとタグ", "Метки и теги"],
+ ["Güncelleme", "Update available", "Update verfügbar", "업데이트 있음", "更新あり", "Есть обновление"],
+ ["Güncel", "Up to date", "Aktuell", "최신", "最新", "Актуально"],
  ["Çevrimdışısınız", "Offline", "Offline", "오프라인", "オフライン", "Офлайн"],
  ["İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder", "No internet connection. Updates cannot be checked. The program keeps working with this version", "Keine Internetverbindung. Updates können nicht geprüft werden. Das Programm läuft mit dieser Version weiter", "인터넷에 연결되어 있지 않습니다. 업데이트를 확인할 수 없습니다. 프로그램은 현재 버전으로 계속 작동합니다", "インターネットに接続されていません。更新を確認できません。プログラムはこのバージョンで引き続き動作します", "Нет подключения к интернету. Проверить обновления нельзя. Программа продолжает работать в этой версии"],
  ["Güncelleme var", "Update available", "Update verfügbar", "업데이트 있음", "更新があります", "Доступно обновление"],
@@ -802,7 +807,7 @@ body:`<h3>Nerelerde çalışır</h3>
 <li>Türkçe, İngilizce, Almanca, Korece, Japonca ve Rusça arayüz sunar.</li>
 <li><b>Açı</b> düğmesi tüm kesitlerin kenarında 0-360° açı skalasını gösterir. Cihaz listesinden Varian (180° altta) ya da Elekta (0° altta) seçilir.</li>
 <li>Fareyle bir düğmenin üstüne gelince ne işe yaradığını yazar. <b>İlk görünüm</b> düğmesi ekranı dosya ilk yüklendiğinde tüm serilerin ayrı kutularda açıldığı haline döndürür.</li>
-<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar ve bulursa indirmeden önce sorar. İnternet yoksa düğmenin yanında <b>Çevrimdışısınız</b> yazar. Her güncellemeden sonra <b>Yenilikler</b> penceresi açılır.</li>
+<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. <b>Güncelle</b> düğmesi (masaüstünde üst şeritte, telefonda sayfanın altında) yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar ve bulursa indirmeden önce sorar. İnternet yoksa düğmenin yanında <b>Çevrimdışısınız</b> yazar. Her güncellemeden sonra <b>Yenilikler</b> penceresi açılır.</li>
 <li>Masaüstünde program her ekranda tek sayfaya sığar, kaydırma gerekmez. İşaretler, ölçümler ve DICOM etiketleri araç çubuğundaki <b>İşaretler / Etiketler</b> düğmesiyle açılan yan paneldedir.</li>
 </ul>
 <h3>Bilmeniz gerekenler</h3>
@@ -840,7 +845,7 @@ body:`<h3>Where it works</h3>
 <li>Offers the interface in Turkish, English, German, Korean, Japanese and Russian.</li>
 <li>The <b>Angle</b> button shows a 0-360° angle scale around the edges of every view. Choose Varian (180° at the bottom) or Elekta (0° at the bottom) from the device list.</li>
 <li>Hovering over a button with the mouse shows what it does. The <b>Initial view</b> button returns the screen to the layout shown when the file was first loaded, with all series open in separate cells.</li>
-<li>Works offline both as a single file and from a web address. The <b>Update</b> button at the bottom of the page downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself and asks before downloading it. Without internet, <b>Offline</b> appears next to the button. After every update a <b>What's new</b> window opens.</li>
+<li>Works offline both as a single file and from a web address. The <b>Update</b> button (in the top bar on desktop, at the bottom of the page on phones) downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself and asks before downloading it. Without internet, <b>Offline</b> appears next to the button. After every update a <b>What's new</b> window opens.</li>
 <li>On desktop the program fits on one page on any screen, no scrolling needed. Markers, measurements and DICOM tags are in a side panel opened with the <b>Markers / Tags</b> button in the toolbar.</li>
 </ul>
 <h3>Good to know</h3>
@@ -878,7 +883,7 @@ body:`<h3>Wo es funktioniert</h3>
 <li>Bietet die Oberfläche auf Türkisch, Englisch, Deutsch, Koreanisch, Japanisch und Russisch.</li>
 <li>Die Schaltfläche <b>Winkel</b> zeigt am Rand jeder Ansicht eine Winkelskala von 0 bis 360°. In der Geräteliste wählen Sie Varian (180° unten) oder Elekta (0° unten).</li>
 <li>Beim Überfahren einer Schaltfläche mit der Maus wird angezeigt, was sie tut. Die Schaltfläche <b>Ausgangsansicht</b> stellt die Ansicht wie beim ersten Laden der Datei wieder her, mit allen Serien in getrennten Feldern.</li>
-<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> unten auf der Seite lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version und fragt vor dem Herunterladen. Ohne Internet steht neben der Schaltfläche <b>Offline</b>. Nach jedem Update öffnet sich das Fenster <b>Neuigkeiten</b>.</li>
+<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> (am Desktop oben, am Telefon unten auf der Seite) lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version und fragt vor dem Herunterladen. Ohne Internet steht neben der Schaltfläche <b>Offline</b>. Nach jedem Update öffnet sich das Fenster <b>Neuigkeiten</b>.</li>
 <li>Am Desktop passt das Programm auf jedem Bildschirm auf eine Seite, ohne Scrollen. Markierungen, Messungen und DICOM-Tags stehen in einem Seitenfeld, das die Schaltfläche <b>Markierungen / Tags</b> in der Werkzeugleiste öffnet.</li>
 </ul>
 <h3>Gut zu wissen</h3>
@@ -916,7 +921,7 @@ body:`<h3>사용 가능한 환경</h3>
 <li>터키어, 영어, 독일어, 한국어, 일본어, 러시아어 인터페이스를 제공합니다.</li>
 <li><b>각도</b> 버튼은 모든 화면의 가장자리에 0–360° 각도 눈금을 표시합니다. 장비 목록에서 Varian(180° 아래) 또는 Elekta(0° 아래)를 선택하세요.</li>
 <li>마우스를 버튼 위에 올리면 기능 설명이 표시됩니다. <b>초기 화면</b> 버튼은 파일을 처음 불러왔을 때의 화면, 즉 모든 시리즈가 개별 칸에 열린 상태로 되돌립니다.</li>
-<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인하고, 발견하면 다운로드 전에 묻습니다. 인터넷이 없으면 버튼 옆에 <b>오프라인</b>이 표시됩니다. 업데이트할 때마다 <b>새로운 기능</b> 창이 열립니다.</li>
+<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. <b>업데이트</b> 버튼(데스크톱은 위쪽 막대, 휴대폰은 페이지 아래쪽)이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인하고, 발견하면 다운로드 전에 묻습니다. 인터넷이 없으면 버튼 옆에 <b>오프라인</b>이 표시됩니다. 업데이트할 때마다 <b>새로운 기능</b> 창이 열립니다.</li>
 <li>데스크톱에서는 어떤 화면에서도 한 페이지에 맞춰져 스크롤이 필요 없습니다. 마커, 측정값, DICOM 태그는 도구 모음의 <b>마커 / 태그</b> 버튼으로 여는 측면 패널에 있습니다.</li>
 </ul>
 <h3>알아 두세요</h3>
@@ -954,7 +959,7 @@ body:`<h3>動作環境</h3>
 <li>トルコ語、英語、ドイツ語、韓国語、日本語、ロシア語のインターフェースに対応しています。</li>
 <li><b>角度</b>ボタンは、すべてのビューの端に0〜360°の角度目盛りを表示します。装置のリストからVarian（180°が下）またはElekta（0°が下）を選択します。</li>
 <li>ボタンにマウスを重ねると、その機能が表示されます。<b>初期表示</b>ボタンは、ファイルを最初に読み込んだときの表示、つまりすべてのシリーズが別々のセルに開いた状態に戻します。</li>
-<li>単一ファイルでもWebアドレスからでもオフラインで動作します。ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認し、見つかるとダウンロード前に確認します。インターネットがないとボタンの横に<b>オフライン</b>と表示されます。更新のたびに<b>新機能</b>ウィンドウが開きます。</li>
+<li>単一ファイルでもWebアドレスからでもオフラインで動作します。<b>更新</b>ボタン（デスクトップは上部バー、スマートフォンはページ下部）で新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認し、見つかるとダウンロード前に確認します。インターネットがないとボタンの横に<b>オフライン</b>と表示されます。更新のたびに<b>新機能</b>ウィンドウが開きます。</li>
 <li>デスクトップではどの画面でも1ページに収まり、スクロールは不要です。マーカー、計測、DICOMタグはツールバーの<b>マーカー / タグ</b>ボタンで開くサイドパネルにあります。</li>
 </ul>
 <h3>ご注意</h3>
@@ -992,7 +997,7 @@ body:`<h3>Где работает</h3>
 <li>Интерфейс доступен на турецком, английском, немецком, корейском, японском и русском языках.</li>
 <li>Кнопка <b>Угол</b> показывает шкалу углов 0–360° по краям всех изображений. В списке аппаратов выберите Varian (180° внизу) или Elekta (0° внизу).</li>
 <li>При наведении мыши на кнопку показывается, для чего она нужна. Кнопка <b>Исходный вид</b> возвращает экран к виду при первой загрузке файла: все серии открыты в отдельных ячейках.</li>
-<li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> внизу страницы скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии и спрашивает перед скачиванием. Без интернета рядом с кнопкой появляется <b>Офлайн</b>. После каждого обновления открывается окно <b>Что нового</b>.</li>
+<li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> (на компьютере вверху, на телефоне внизу страницы) скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии и спрашивает перед скачиванием. Без интернета рядом с кнопкой появляется <b>Офлайн</b>. После каждого обновления открывается окно <b>Что нового</b>.</li>
 <li>На компьютере программа помещается на одну страницу на любом экране, без прокрутки. Метки, измерения и DICOM-теги находятся в боковой панели, которую открывает кнопка <b>Метки / Теги</b> на панели инструментов.</li>
 </ul>
 <h3>Важно знать</h3>
@@ -1017,31 +1022,37 @@ tr:{title:'Yenilikler',hide:'Bir daha gösterme',btn:'Tamam',items:[
  'Masaüstünde işaretler, ölçümler ve DICOM etiketleri artık araç çubuğundaki <b>İşaretler / Etiketler</b> düğmesiyle açılan yan panelde. Tüm serilerin işaret listesi de bu panelde. Düğmedeki sayı işaret sayısını gösterir.',
  'Masaüstünde program hangi ekranda açılırsa açılsın tek sayfaya sığar. Aşağı kaydırma gerekmez, görüntü alanı ekranı en iyi şekilde kullanır.',
  'Telefon görünümü değişmedi.',
+ 'Masaüstünde <b>Güncelle</b> düğmesi artık üst şeritte, dil seçiminin yanında. Yeni sürüm varsa düğmede <b>Güncelleme</b>, yoksa <b>Güncel</b> yazar.',
  'Uygulamanın simgesi yenilendi.']},
 en:{title:"What's new",hide:"Don't show again",btn:'OK',items:[
  'On desktop, markers, measurements and DICOM tags now open in a side panel with the <b>Markers / Tags</b> button in the toolbar. The marker list of all series is in this panel too. The number on the button shows how many markers there are.',
  'On desktop the program now fits on one page on any screen. No scrolling is needed and the image area makes the best use of the screen.',
  'The phone layout is unchanged.',
+ 'On desktop the <b>Update</b> button is now in the top bar, next to the language menu. It reads <b>Update available</b> when there is a new version and <b>Up to date</b> otherwise.',
  'The app icon has been redesigned.']},
 de:{title:'Neuigkeiten',hide:'Nicht mehr anzeigen',btn:'OK',items:[
  'Am Desktop öffnen sich Markierungen, Messungen und DICOM-Tags jetzt in einem Seitenfeld über die Schaltfläche <b>Markierungen / Tags</b> in der Werkzeugleiste. Dort steht auch die Markierungsliste aller Serien. Die Zahl auf der Schaltfläche zeigt die Anzahl der Markierungen.',
  'Am Desktop passt das Programm jetzt auf jedem Bildschirm auf eine Seite. Scrollen ist nicht nötig, der Bildbereich nutzt den Bildschirm optimal.',
  'Die Telefonansicht bleibt unverändert.',
+ 'Am Desktop steht die Schaltfläche <b>Aktualisieren</b> jetzt oben neben der Sprachauswahl. Gibt es eine neue Version, steht darauf <b>Update verfügbar</b>, sonst <b>Aktuell</b>.',
  'Das App-Symbol wurde neu gestaltet.']},
 ko:{title:'새로운 기능',hide:'다시 표시하지 않음',btn:'확인',items:[
  '데스크톱에서 마커, 측정값, DICOM 태그가 이제 도구 모음의 <b>마커 / 태그</b> 버튼으로 여는 측면 패널에 표시됩니다. 모든 시리즈의 마커 목록도 이 패널에 있습니다. 버튼의 숫자는 마커 수를 나타냅니다.',
  '데스크톱에서는 어떤 화면에서도 프로그램이 한 페이지에 맞춰집니다. 스크롤할 필요가 없고 영상 영역이 화면을 최대한 활용합니다.',
  '휴대폰 화면 구성은 바뀌지 않았습니다.',
+ '데스크톱에서 <b>업데이트</b> 버튼이 이제 위쪽 막대의 언어 선택 옆에 있습니다. 새 버전이 있으면 <b>업데이트 있음</b>, 없으면 <b>최신</b>으로 표시됩니다.',
  '앱 아이콘이 새로워졌습니다.']},
 ja:{title:'新機能',hide:'今後表示しない',btn:'OK',items:[
  'デスクトップでは、マーカー、計測、DICOMタグがツールバーの<b>マーカー / タグ</b>ボタンで開くサイドパネルに表示されるようになりました。全シリーズのマーカー一覧もこのパネルにあります。ボタンの数字はマーカーの数です。',
  'デスクトップでは、どの画面でもプログラムが1ページに収まります。スクロールは不要で、画像エリアが画面を最大限に使います。',
  'スマートフォンの表示は変わっていません。',
+ 'デスクトップでは<b>更新</b>ボタンが上部バーの言語選択の横に移りました。新しいバージョンがあれば<b>更新あり</b>、なければ<b>最新</b>と表示されます。',
  'アプリのアイコンを新しくしました。']},
 ru:{title:'Что нового',hide:'Больше не показывать',btn:'ОК',items:[
  'На компьютере метки, измерения и DICOM-теги теперь открываются в боковой панели кнопкой <b>Метки / Теги</b> на панели инструментов. Там же список меток всех серий. Число на кнопке показывает количество меток.',
  'На компьютере программа теперь помещается на одну страницу на любом экране. Прокрутка не нужна, область изображения максимально использует экран.',
  'Вид на телефоне не изменился.',
+ 'На компьютере кнопка <b>Обновить</b> теперь вверху, рядом с выбором языка. Если есть новая версия, на ней написано <b>Есть обновление</b>, иначе <b>Актуально</b>.',
  'Значок приложения обновлён.']}
 };
 function fillNews(){
@@ -1056,13 +1067,28 @@ function fillWelcome(){
   const w=WELCOME[LANG];
   $('#wTitle').textContent=w.title;$('#wSub').textContent=w.sub;$('#wBody').innerHTML=w.body;$('#wSign').innerHTML=w.sign;$('#wClose').textContent=w.btn;
 }
+/* Güncelle düğmesinin yazısı: yeni sürüm varsa "Güncelleme", yoksa "Güncel", henüz bilinmiyorsa "Güncelle" */
+let UPD_STATE='';
+function setUpdState(v){
+  UPD_STATE=v||'';const b=document.getElementById('updBtn');if(!b)return;
+  b.textContent=TX(UPD_STATE==='new'?'Güncelleme':UPD_STATE==='ok'?'Güncel':'Güncelle');
+  b.classList.toggle('ok',UPD_STATE==='ok');
+}
 let NET_OFF=false;
 function setNetOff(v){NET_OFF=!!v;const e=document.getElementById('offl');if(e)e.hidden=!NET_OFF;}
 function fillFooter(){
   const f=FOOT[LANG],ub=$('#updBtn');
   $('#foot').innerHTML=`${esc(f[0])}\n  <span class="only-mouse">${esc(f[1])}</span>\n  <span class="only-touch">${esc(f[2])}</span>\n  <div class="credit"><span>${esc(TX('Medikal Fizik Uzmanı'))}</span> Yemliha Enes TÜTEN <span class="ver">· ${BUILD_DATE?BUILD_DATE+' · ':''}${VER}</span></div>`;
-  if(ub){const c=$('#foot .credit');if(c){c.appendChild(ub);const o=document.createElement('span');o.id='offl';o.className='offl';o.textContent=TX('Çevrimdışısınız');o.title=TX('İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder');o.hidden=!NET_OFF;c.appendChild(o);}ub.textContent=TX('Güncelle');ub.title=TX(UPD_FILE?'Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
+  if(ub){const c=$('#foot .credit');if(c){c.appendChild(ub);const old=document.getElementById('offl');if(old)old.remove();const o=document.createElement('span');o.id='offl';o.className='offl';o.textContent=TX('Çevrimdışısınız');o.title=TX('İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder');o.hidden=!NET_OFF;c.appendChild(o);}setUpdState(UPD_STATE);ub.title=TX(UPD_FILE?'Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
 }
+/* Güncelle düğmesi masaüstünde üst şeritte (dil seçiminin yanında), telefonda alt bilgide durur */
+const UPD_TOP=matchMedia('(min-width:721px) and (hover:hover),(min-width:721px) and (min-height:521px)');
+function placeUpd(){
+  const ub=document.getElementById('updBtn'),o=document.getElementById('offl');if(!ub)return;
+  const dst=UPD_TOP.matches?document.querySelector('.top .brand'):document.querySelector('#foot .credit');if(!dst)return;
+  if(ub.parentNode!==dst)dst.appendChild(ub);if(o&&o.parentNode!==dst)dst.appendChild(o);
+}
+(UPD_TOP.addEventListener?UPD_TOP.addEventListener('change',placeUpd):UPD_TOP.addListener(placeUpd));
 
 const TIPS=[
  ["#angBtn","Tüm kesitlerin kenarında 0-360° açı skalasını gösterir ya da gizler"],
@@ -1193,7 +1219,7 @@ function applyLang(l,keepStore){
   document.documentElement.lang=LANG;
   document.title=TX('DICOM Görüntüleyici');
   const sel=document.getElementById('langSel');if(sel){sel.value=LANG;sel.title=TX('Arayüz dilini seçin');sel.ariaLabel=TX('Dil');}
-  fillWelcome();fillNews();fillFooter();
+  fillWelcome();fillNews();fillFooter();placeUpd();
   trTree(document.body);
   startObs();
   if(typeof renderAll==='function'&&typeof S!=='undefined'&&S.cur)try{renderAll();}catch(_){}
@@ -2853,7 +2879,7 @@ loadSample();
     });
   }
   function ready(ver){
-    btn.classList.add('ready');
+    btn.classList.add('ready');setUpdState('new');
     setStatus('Yeni sürüm hazır: '+ver+'. Yüklü görüntüler kapanacak. Güncellemek için düğmeye tekrar basın.');
   }
   async function check(silent){
@@ -2866,8 +2892,8 @@ loadSample();
       j=await r.json();
     }catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
     setNetOff(false);
-    if(!j||!j.version||j.version===VER){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
-    if(!silent)setStatus('Yeni sürüm indiriliyor.');
+    if(!j||!j.version||j.version===VER){setUpdState('ok');if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
+    setUpdState('new');if(!silent)setStatus('Yeni sürüm indiriliyor.');
     try{
       await reg.update();
       waiting=reg.waiting||await waitInstalled(reg.installing);
@@ -2935,7 +2961,7 @@ function fileUpdater(btn){
   }
   /* silent: otomatik kontrol. Ağ hatasında false döner (yeniden denenebilir). */
   function ask(j){
-    asked=true;pending=j;btn.classList.add('ready');
+    asked=true;pending=j;btn.classList.add('ready');setUpdState('new');
     const A=document.getElementById('updAsk');
     document.getElementById('uaText').textContent='Yeni sürüm yayınlandı: '+fdate(j.date)+' · '+j.version+'. İndirmek ister misiniz?';
     A.hidden=false;document.getElementById('uaYes').focus();
@@ -2955,7 +2981,8 @@ function fileUpdater(btn){
     let j;
     try{j=await getJSON();}catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
     setNetOff(false);
-    if(!j||!j.version||num(j.version)<=num(VER)){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    if(!j||!j.version||num(j.version)<=num(VER)){setUpdState('ok');if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    setUpdState('new');
     if(silent){if(!asked)ask(j);return true;}   /* otomatik kontrolde yalnızca bir kez sorulur */
     try{await download(j);}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);return false;}
     return true;
