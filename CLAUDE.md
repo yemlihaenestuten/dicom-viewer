@@ -5,8 +5,8 @@ Tek dosyalık tarayıcı DICOM görüntüleyici (CT/MR/X-ray/PET, MPR, ızgara, 
 ## Derleme
 Kaynak `src/` altındaki parçalardır. Çıktı depo köküne yazılır (Pages bunu yayınlar):
 
-    python3 tools/make_site.py V.2 https://KULLANICI.github.io/dicom-viewer/
-    python3 tools/make_readme.py https://KULLANICI.github.io/dicom-viewer/
+    python3 tools/make_site.py V.2 https://yemlihaenestuten.github.io/dicom-viewer/
+    python3 tools/make_readme.py https://yemlihaenestuten.github.io/dicom-viewer/
 
 `make_site.py` parçaları sırayla birleştirir (p1_head.html, p0_i18n.js, p2a_dicom.js, p2b_volume.js, p3a_core.js, p3b_ui.js, p3c_studies.js, p3d_update.js, p4_tail.html), sürümü `VER` sabitine yazar ve `index.html`, `DICOM_Goruntuleyici.html`, `version.json`, `sw.js`, `manifest.webmanifest`, simgeleri üretir. Kök dizindeki bu dosyalara elle dokunma, `src/` değiştirip yeniden derle.
 Sürüm yayınlama: derle, commit, push. `sw.js` içindeki sürüm değiştiği için tarayıcılar yeni sürümü algılar. Programdaki Güncelle düğmesi `version.json` ile `VER` değerini karşılaştırır.

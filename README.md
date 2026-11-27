@@ -11,7 +11,7 @@ Tomografi (BT), MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosy
 **Çalıştığı yerler:** Windows, Mac, iPhone, iPad ve Android. Chrome, Safari, Edge ve Firefox.
 
 ## Nasıl açılır
-- Web adresi: https://KULLANICI.github.io/dicom-viewer/
+- Web adresi: https://yemlihaenestuten.github.io/dicom-viewer/
 - Ya da `DICOM_Goruntuleyici.html` dosyasını indirip tarayıcıyla açın. iPhone ve iPad'de dosyayı Dosyalar uygulamasında açmayın, Safari ile açın.
 
 ## Nasıl kullanılır
@@ -50,7 +50,7 @@ A free single-file DICOM viewer that opens CT, MR, X-ray and PET images in the b
 **Works on:** Windows, Mac, iPhone, iPad and Android. Chrome, Safari, Edge and Firefox.
 
 ## How to open
-- Web address: https://KULLANICI.github.io/dicom-viewer/
+- Web address: https://yemlihaenestuten.github.io/dicom-viewer/
 - Or download `DICOM_Goruntuleyici.html` and open it with a browser. On iPhone and iPad do not open the file in the Files app preview. Open it with Safari.
 
 ## How to use
@@ -89,7 +89,7 @@ Ein kostenloser Ein-Datei-DICOM-Betrachter, der CT-, MR-, Röntgen- und PET-Bild
 **Läuft auf:** Windows, Mac, iPhone, iPad und Android. Chrome, Safari, Edge und Firefox.
 
 ## So öffnen Sie es
-- Webadresse: https://KULLANICI.github.io/dicom-viewer/
+- Webadresse: https://yemlihaenestuten.github.io/dicom-viewer/
 - Oder laden Sie `DICOM_Goruntuleyici.html` herunter und öffnen Sie die Datei im Browser. Auf iPhone und iPad die Datei nicht in der Vorschau der Dateien-App öffnen, sondern mit Safari.
 
 ## Anleitung
@@ -128,7 +128,7 @@ CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM
 **사용 환경:** Windows, Mac, iPhone, iPad, Android. Chrome, Safari, Edge, Firefox.
 
 ## 여는 방법
-- 웹 주소: https://KULLANICI.github.io/dicom-viewer/
+- 웹 주소: https://yemlihaenestuten.github.io/dicom-viewer/
 - 또는 `DICOM_Goruntuleyici.html` 파일을 내려받아 브라우저로 여세요. iPhone과 iPad에서는 파일 앱 미리보기로 열지 말고 Safari로 여세요.
 
 ## 사용 방법
@@ -167,7 +167,7 @@ CT、MR、X線、PET画像をブラウザで開く無料の単一ファイルDIC
 **動作環境：** Windows、Mac、iPhone、iPad、Android。Chrome、Safari、Edge、Firefox。
 
 ## 開き方
-- Webアドレス：https://KULLANICI.github.io/dicom-viewer/
+- Webアドレス：https://yemlihaenestuten.github.io/dicom-viewer/
 - または `DICOM_Goruntuleyici.html` をダウンロードしてブラウザで開きます。iPhoneとiPadでは「ファイル」アプリのプレビューで開かず、Safariで開いてください。
 
 ## 使い方
@@ -206,7 +206,7 @@ Webアドレスをインターネット接続中に一度開くと、その後�
 **Работает на:** Windows, Mac, iPhone, iPad и Android. Chrome, Safari, Edge и Firefox.
 
 ## Как открыть
-- Веб-адрес: https://KULLANICI.github.io/dicom-viewer/
+- Веб-адрес: https://yemlihaenestuten.github.io/dicom-viewer/
 - Или скачайте файл `DICOM_Goruntuleyici.html` и откройте его в браузере. На iPhone и iPad не открывайте файл в предпросмотре приложения «Файлы», а откройте его в Safari.
 
 ## Как пользоваться
