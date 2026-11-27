@@ -1,6 +1,6 @@
 # DICOM Görüntüleyici / DICOM Viewer
 
-**[⬇ İndir / Download (HTML)](https://github.com/yemlihaenestuten/dicom-viewer/releases/latest/download/DICOM_Goruntuleyici.html)**  ·  **[🌐 Web](https://yemlihaenestuten.github.io/dicom-viewer/)**
+**[⬇ İndir / Download (HTML)](https://yemlihaenestuten.github.io/dicom-viewer/indir.html)**  ·  **[🌐 Web](https://yemlihaenestuten.github.io/dicom-viewer/)**
 
 [Türkçe](#tr) · [English](#en) · [Deutsch](#de) · [한국어](#ko) · [日本語](#ja) · [Русский](#ru)
 

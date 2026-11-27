@@ -37,6 +37,7 @@ self.addEventListener('fetch',e=>{
   e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(r=>r||fetch(e.request)));
 });
 """%ver)
+open(o+'indir.html','w',encoding='utf-8').write(open(d+'indir.html',encoding='utf-8').read())  # tek tıkla indirme sayfası
 open(o+'manifest.webmanifest','w',encoding='utf-8').write(json.dumps({
  'name':'DICOM Görüntüleyici','short_name':'DICOM','description':'CT, MR, X-ray, PET DICOM viewer. Offline, single file.',
  'start_url':'./','scope':'./','display':'standalone','background_color':'#0d1013','theme_color':'#0d1013','lang':'tr',
