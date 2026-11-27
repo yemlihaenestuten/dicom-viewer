@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 url=sys.argv[1] if len(sys.argv)>1 else ''
 link=url if url else 'https://KULLANICI.github.io/dicom-viewer/'
