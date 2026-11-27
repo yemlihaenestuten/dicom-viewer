@@ -209,7 +209,8 @@ L['ru']=('Русский','''# DICOM-просмотрщик (V.3)
 
 Разработал Yemliha Enes Tüten, специалист по медицинской физике''')
 order=['tr','en','de','ko','ja','ru']
-out='# DICOM Görüntüleyici / DICOM Viewer\n\n'+' · '.join('[%s](#%s)'%(L[k][0],k) for k in order)+'\n\n'
+DL='https://github.com/yemlihaenestuten/dicom-viewer/releases/latest/download/DICOM_Goruntuleyici.html'
+out='# DICOM Görüntüleyici / DICOM Viewer\n\n'+'**[⬇ İndir / Download (HTML)](%s)**'%DL+('  ·  **[🌐 Web](%s)**'%url if url else '')+'\n\n'+' · '.join('[%s](#%s)'%(L[k][0],k) for k in order)+'\n\n'
 for k in order:
     out+='<a id="%s"></a>\n\n'%k+L[k][1].format(link=link,mail=mail)+'\n\n---\n\n'
 open(__import__('os').path.join(__import__('os').path.dirname(__import__('os').path.dirname(__import__('os').path.abspath(__file__))),'README.md'),'w',encoding='utf-8').write(out.rstrip('\n-\n ')+'\n')

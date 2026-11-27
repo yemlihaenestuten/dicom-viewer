@@ -9,7 +9,7 @@ Kaynak `src/` altındaki parçalardır. Çıktı depo köküne yazılır (Pages 
     python3 tools/make_readme.py https://yemlihaenestuten.github.io/dicom-viewer/
 
 `make_site.py` parçaları sırayla birleştirir (p1_head.html, p0_i18n.js, p2a_dicom.js, p2b_volume.js, p3a_core.js, p3b_ui.js, p3c_studies.js, p3d_update.js, p4_tail.html), sürümü `VER` sabitine yazar ve `index.html`, `DICOM_Goruntuleyici.html`, `version.json`, `sw.js`, `manifest.webmanifest`, simgeleri üretir. Kök dizindeki bu dosyalara elle dokunma, `src/` değiştirip yeniden derle.
-Sürüm yayınlama: derle, commit, push. `sw.js` içindeki sürüm değiştiği için tarayıcılar yeni sürümü algılar. Programdaki Güncelle düğmesi `version.json` ile `VER` değerini karşılaştırır.
+Sürüm yayınlama: derle, commit, push, sonra `gh release create V.n DICOM_Goruntuleyici.html --title "DICOM Görüntüleyici V.n" --notes "..." --latest`. README ve depo açıklamasındaki indirme bağlantısı (`releases/latest/download/DICOM_Goruntuleyici.html`) her zaman son release'i indirir, release açılmazsa eski sürüm iner. `sw.js` içindeki sürüm değiştiği için tarayıcılar yeni sürümü algılar. Programdaki Güncelle düğmesi `version.json` ile `VER` değerini karşılaştırır.
 
 ## Kurallar (kullanıcının kalıcı istekleri)
 - Karşılama penceresi her açılışta görünür. "Bir daha gösterme" yok. Her sürümde yetenek listesi 6 dilde güncellenir.
