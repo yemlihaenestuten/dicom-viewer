@@ -3,7 +3,7 @@ url=sys.argv[1] if len(sys.argv)>1 else ''
 link=url if url else 'https://KULLANICI.github.io/dicom-viewer/'
 mail='yemlihaenestutenwork@gmail.com'
 L={}
-L['tr']=('Türkçe','''# DICOM Görüntüleyici (V.2)
+L['tr']=('Türkçe','''# DICOM Görüntüleyici (V.3)
 
 Tomografi (BT), MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosyalık ücretsiz DICOM görüntüleyici. Kurulum gerekmez. Görüntüler hiçbir yere yüklenmez, cihazda kalır. Tanı amaçlı değildir, yalnızca inceleme içindir.
 
@@ -31,13 +31,13 @@ Tomografi (BT), MR, röntgen ve PET görüntülerini tarayıcıda açan tek dosy
 - Türkçe, English, Deutsch, 한국어, 日本語, Русский arayüz
 
 ## Çevrimdışı çalışma ve güncelleme
-Web adresi bir kez internetle açıldıktan sonra program internetsiz de çalışır. Sayfanın altındaki **Güncelle** düğmesi yeni sürüm olup olmadığına bakar. Varsa indirir. Güncellemeden önce yüklü görüntülerin kapanacağı sorulur. Güncellemeden sonra program yine çevrimdışı çalışır. `DICOM_Goruntuleyici.html` dosyası tek başına açıldığında **Güncelle** düğmesi yeni sürümü indirip `DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html` adıyla kaydeder. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar, sonra yalnızca düğmeyle kontrol edilir. Telefonda ana ekrana eklemek için iPhone/iPad'de Safari'de **Paylaş > Ana Ekrana Ekle**, Android'de Chrome'da **⋮ > Ana ekrana ekle** seçeneğini kullanın.
+Web adresi bir kez internetle açıldıktan sonra program internetsiz de çalışır. Sayfanın altındaki **Güncelle** düğmesi yeni sürüm olup olmadığına bakar. Varsa indirir. Güncellemeden önce yüklü görüntülerin kapanacağı sorulur. Güncellemeden sonra program yine çevrimdışı çalışır. `DICOM_Goruntuleyici.html` dosyası tek başına açıldığında **Güncelle** düğmesi yeni sürümü indirip `DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html` adıyla kaydeder. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar ve bulursa indirmeden önce sorar. Sonra yalnızca düğmeyle kontrol edilir. İnternet yoksa düğmenin yanında **Çevrimdışısınız** yazar. Her güncellemeden sonra **Yenilikler** penceresi açılır, **Bir daha gösterme** işaretlenirse o sürüm için bir daha açılmaz. Telefonda ana ekrana eklemek için iPhone/iPad'de Safari'de **Paylaş > Ana Ekrana Ekle**, Android'de Chrome'da **⋮ > Ana ekrana ekle** seçeneğini kullanın.
 
 ## Geri bildirim
 Eksik gördüğünüz bir özellik ya da hata için: {mail}
 
 Geliştiren: Medikal Fizik Uzmanı Yemliha Enes Tüten''')
-L['en']=('English','''# DICOM Viewer (V.2)
+L['en']=('English','''# DICOM Viewer (V.3)
 
 A free single-file DICOM viewer that opens CT, MR, X-ray and PET images in the browser. No installation needed. Images are never uploaded and stay on your device. For review only, not for diagnosis.
 
@@ -65,13 +65,13 @@ A free single-file DICOM viewer that opens CT, MR, X-ray and PET images in the b
 - Interface in Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Offline use and updates
-After the web address has been opened once with internet, the program also works without internet. The **Update** button at the bottom of the page checks for a new version and downloads it. It warns that loaded images will be closed. After the update the program works offline again. When `DICOM_Goruntuleyici.html` is opened as a single file, the **Update** button downloads the new version and saves it as `DICOM GÖRÜNTÜLEYİCİ_date_version.html`. During the first minute after opening the program also checks by itself; after that only the button checks. To add it to the home screen use **Share > Add to Home Screen** in Safari on iPhone/iPad or **⋮ > Add to Home screen** in Chrome on Android.
+After the web address has been opened once with internet, the program also works without internet. The **Update** button at the bottom of the page checks for a new version and downloads it. It warns that loaded images will be closed. After the update the program works offline again. When `DICOM_Goruntuleyici.html` is opened as a single file, the **Update** button downloads the new version and saves it as `DICOM GÖRÜNTÜLEYİCİ_date_version.html`. During the first minute after opening the program also checks by itself and asks before downloading; after that only the button checks. Without internet, **Offline** appears next to the button. After every update a **What's new** window opens; tick **Don't show again** to hide it for that version. To add it to the home screen use **Share > Add to Home Screen** in Safari on iPhone/iPad or **⋮ > Add to Home screen** in Chrome on Android.
 
 ## Feedback
 Missing a feature or found a bug? {mail}
 
 Developed by Yemliha Enes Tüten, Medical Physics Expert''')
-L['de']=('Deutsch','''# DICOM-Betrachter (V.2)
+L['de']=('Deutsch','''# DICOM-Betrachter (V.3)
 
 Ein kostenloser Ein-Datei-DICOM-Betrachter, der CT-, MR-, Röntgen- und PET-Bilder im Browser öffnet. Keine Installation nötig. Bilder werden nicht hochgeladen und bleiben auf Ihrem Gerät. Nur zur Ansicht, nicht zur Diagnose.
 
@@ -99,13 +99,13 @@ Ein kostenloser Ein-Datei-DICOM-Betrachter, der CT-, MR-, Röntgen- und PET-Bild
 - Oberfläche in Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Offline-Nutzung und Updates
-Nachdem die Webadresse einmal mit Internet geöffnet wurde, läuft das Programm auch ohne Internet. Die Schaltfläche **Aktualisieren** unten auf der Seite prüft, ob es eine neue Version gibt, und lädt sie herunter. Sie warnt, dass geladene Bilder geschlossen werden. Nach dem Update läuft das Programm wieder offline. Wird `DICOM_Goruntuleyici.html` als einzelne Datei geöffnet, lädt **Aktualisieren** die neue Version herunter und speichert sie als `DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html`. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst, danach nur noch über die Schaltfläche. Zum Startbildschirm hinzufügen: auf iPhone/iPad in Safari **Teilen > Zum Home-Bildschirm**, auf Android in Chrome **⋮ > Zum Startbildschirm hinzufügen**.
+Nachdem die Webadresse einmal mit Internet geöffnet wurde, läuft das Programm auch ohne Internet. Die Schaltfläche **Aktualisieren** unten auf der Seite prüft, ob es eine neue Version gibt, und lädt sie herunter. Sie warnt, dass geladene Bilder geschlossen werden. Nach dem Update läuft das Programm wieder offline. Wird `DICOM_Goruntuleyici.html` als einzelne Datei geöffnet, lädt **Aktualisieren** die neue Version herunter und speichert sie als `DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html`. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst und fragt vor dem Herunterladen, danach nur noch über die Schaltfläche. Ohne Internet steht neben der Schaltfläche **Offline**. Nach jedem Update öffnet sich **Neuigkeiten**; mit **Nicht mehr anzeigen** bleibt es für diese Version geschlossen. Zum Startbildschirm hinzufügen: auf iPhone/iPad in Safari **Teilen > Zum Home-Bildschirm**, auf Android in Chrome **⋮ > Zum Startbildschirm hinzufügen**.
 
 ## Rückmeldung
 Eine Funktion fehlt oder ein Fehler aufgefallen? {mail}
 
 Entwickelt von Yemliha Enes Tüten, Medizinphysik-Experte''')
-L['ko']=('한국어','''# DICOM 뷰어 (V.2)
+L['ko']=('한국어','''# DICOM 뷰어 (V.3)
 
 CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM 뷰어입니다. 설치가 필요 없습니다. 이미지는 업로드되지 않고 기기에 남습니다. 진단용이 아니라 열람용입니다.
 
@@ -133,13 +133,13 @@ CT, MR, X선, PET 영상을 브라우저에서 여는 무료 단일 파일 DICOM
 - Türkçe, English, Deutsch, 한국어, 日本語, Русский 인터페이스
 
 ## 오프라인 사용과 업데이트
-웹 주소를 인터넷에 연결된 상태에서 한 번 열면 이후에는 인터넷 없이도 작동합니다. 페이지 아래쪽의 **업데이트** 버튼은 새 버전이 있는지 확인하고 다운로드합니다. 불러온 이미지가 닫힌다는 경고가 표시됩니다. 업데이트 후에도 오프라인으로 작동합니다. `DICOM_Goruntuleyici.html` 파일을 단독으로 열면 **업데이트** 버튼이 새 버전을 다운로드하여 `DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html` 이름으로 저장합니다. 프로그램을 연 후 처음 1분 동안은 스스로도 확인하며, 그 후에는 버튼으로만 확인합니다. 홈 화면에 추가하려면 iPhone/iPad의 Safari에서 **공유 > 홈 화면에 추가**, Android의 Chrome에서 **⋮ > 홈 화면에 추가**를 사용하세요.
+웹 주소를 인터넷에 연결된 상태에서 한 번 열면 이후에는 인터넷 없이도 작동합니다. 페이지 아래쪽의 **업데이트** 버튼은 새 버전이 있는지 확인하고 다운로드합니다. 불러온 이미지가 닫힌다는 경고가 표시됩니다. 업데이트 후에도 오프라인으로 작동합니다. `DICOM_Goruntuleyici.html` 파일을 단독으로 열면 **업데이트** 버튼이 새 버전을 다운로드하여 `DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html` 이름으로 저장합니다. 프로그램을 연 후 처음 1분 동안은 스스로도 확인하고 다운로드 전에 묻습니다. 그 후에는 버튼으로만 확인합니다. 인터넷이 없으면 버튼 옆에 **오프라인**이 표시됩니다. 업데이트할 때마다 **새로운 기능** 창이 열리며 **다시 표시하지 않음**을 선택하면 해당 버전에서는 열리지 않습니다. 홈 화면에 추가하려면 iPhone/iPad의 Safari에서 **공유 > 홈 화면에 추가**, Android의 Chrome에서 **⋮ > 홈 화면에 추가**를 사용하세요.
 
 ## 의견
 부족한 기능이나 오류가 있으면 알려 주세요: {mail}
 
 개발: 의학물리 전문가 Yemliha Enes Tüten''')
-L['ja']=('日本語','''# DICOM ビューア (V.2)
+L['ja']=('日本語','''# DICOM ビューア (V.3)
 
 CT、MR、X線、PET画像をブラウザで開く無料の単一ファイルDICOMビューアです。インストールは不要です。画像はアップロードされず、お使いの端末内にとどまります。診断用ではなく閲覧専用です。
 
@@ -167,13 +167,13 @@ CT、MR、X線、PET画像をブラウザで開く無料の単一ファイルDIC
 - Türkçe、English、Deutsch、한국어、日本語、Русскийのインターフェース
 
 ## オフライン利用と更新
-Webアドレスをインターネット接続中に一度開くと、その後はインターネットなしでも動作します。ページ下部の**更新**ボタンは新しいバージョンを確認してダウンロードします。読み込んだ画像が閉じられる旨の警告が表示されます。更新後も引き続きオフラインで動作します。`DICOM_Goruntuleyici.html`を単一ファイルとして開いた場合、**更新**ボタンは新しいバージョンをダウンロードし`DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html`という名前で保存します。起動後の最初の1分間はプログラム自身も確認し、その後はボタンでのみ確認します。ホーム画面に追加するには、iPhone/iPadのSafariで**共有 > ホーム画面に追加**、AndroidのChromeで**⋮ > ホーム画面に追加**を使用します。
+Webアドレスをインターネット接続中に一度開くと、その後はインターネットなしでも動作します。ページ下部の**更新**ボタンは新しいバージョンを確認してダウンロードします。読み込んだ画像が閉じられる旨の警告が表示されます。更新後も引き続きオフラインで動作します。`DICOM_Goruntuleyici.html`を単一ファイルとして開いた場合、**更新**ボタンは新しいバージョンをダウンロードし`DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html`という名前で保存します。起動後の最初の1分間はプログラム自身も確認し、ダウンロード前に確認を求めます。その後はボタンでのみ確認します。インターネットがないとボタンの横に**オフライン**と表示されます。更新のたびに**新機能**ウィンドウが開き、**今後表示しない**にチェックするとそのバージョンでは開きません。ホーム画面に追加するには、iPhone/iPadのSafariで**共有 > ホーム画面に追加**、AndroidのChromeで**⋮ > ホーム画面に追加**を使用します。
 
 ## フィードバック
 不足している機能や不具合がありましたらご連絡ください：{mail}
 
 開発：医学物理専門家 Yemliha Enes Tüten''')
-L['ru']=('Русский','''# DICOM-просмотрщик (V.2)
+L['ru']=('Русский','''# DICOM-просмотрщик (V.3)
 
 Бесплатный DICOM-просмотрщик в одном файле, открывающий изображения КТ, МРТ, рентгена и ПЭТ в браузере. Установка не нужна. Изображения не загружаются и остаются на вашем устройстве. Только для просмотра, не для диагностики.
 
@@ -201,7 +201,7 @@ L['ru']=('Русский','''# DICOM-просмотрщик (V.2)
 - Интерфейс на Türkçe, English, Deutsch, 한국어, 日本語, Русский
 
 ## Работа офлайн и обновление
-Если один раз открыть веб-адрес при наличии интернета, дальше программа работает и без него. Кнопка **Обновить** внизу страницы проверяет наличие новой версии и скачивает её. Она предупреждает, что загруженные изображения будут закрыты. После обновления программа снова работает офлайн. Если открыть `DICOM_Goruntuleyici.html` как отдельный файл, кнопка **Обновить** скачивает новую версию и сохраняет её под именем `DICOM GÖRÜNTÜLEYİCİ_дата_версия.html`. В первую минуту после запуска программа проверяет и сама, затем — только по кнопке. Чтобы добавить на главный экран, в Safari на iPhone/iPad используйте **Поделиться > На экран «Домой»**, в Chrome на Android — **⋮ > Добавить на главный экран**.
+Если один раз открыть веб-адрес при наличии интернета, дальше программа работает и без него. Кнопка **Обновить** внизу страницы проверяет наличие новой версии и скачивает её. Она предупреждает, что загруженные изображения будут закрыты. После обновления программа снова работает офлайн. Если открыть `DICOM_Goruntuleyici.html` как отдельный файл, кнопка **Обновить** скачивает новую версию и сохраняет её под именем `DICOM GÖRÜNTÜLEYİCİ_дата_версия.html`. В первую минуту после запуска программа проверяет и сама и спрашивает перед скачиванием, затем — только по кнопке. Без интернета рядом с кнопкой появляется **Офлайн**. После каждого обновления открывается окно **Что нового**; если отметить **Больше не показывать**, для этой версии оно не откроется. Чтобы добавить на главный экран, в Safari на iPhone/iPad используйте **Поделиться > На экран «Домой»**, в Chrome на Android — **⋮ > Добавить на главный экран**.
 
 ## Обратная связь
 Не хватает функции или нашли ошибку? {mail}

@@ -3,6 +3,8 @@
   const btn=$('#updBtn');if(!btn)return;
   /* Tek dosya olarak (file://) açıldığında: yalnızca yayın adresi varsa düğme o adresi açar */
   if(UPD_FILE){fileUpdater(btn);return;}
+  const net=()=>setNetOff(!navigator.onLine);
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
   if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;
   let reg=null,waiting=null,busy=false;
   function head(tag,attrs){const e=document.createElement(tag);Object.keys(attrs).forEach(k=>e.setAttribute(k,attrs[k]));document.head.appendChild(e);}
@@ -18,14 +20,15 @@
     setStatus('Yeni sürüm hazır: '+ver+'. Yüklü görüntüler kapanacak. Güncellemek için düğmeye tekrar basın.');
   }
   async function check(silent){
-    if(!navigator.onLine){if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return;}
+    if(!navigator.onLine){setNetOff(true);if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return;}
     if(!silent)setStatus('Sürüm kontrol ediliyor.');
     let j;
     try{
       const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});
       if(!r.ok)throw new Error('http '+r.status);
       j=await r.json();
-    }catch(_){if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
+    }catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
+    setNetOff(false);
     if(!j||!j.version||j.version===VER){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
     if(!silent)setStatus('Yeni sürüm indiriliyor.');
     try{
@@ -63,7 +66,7 @@ function fileUpdater(btn){
   btn.hidden=false;
   const BASE=UPDATE_URL.replace(/\/?$/,'/');
   const WINDOW_MS=60000,RETRY_MS=15000,T0=Date.now();
-  let busy=false,autoDone=false,timer=0,file=null;
+  let busy=false,autoDone=false,timer=0,file=null,pending=null,asked=false;
   const num=v=>{const m=/(\d+)/.exec(String(v||''));return m?+m[1]:0;};
   const pad=n=>String(n).padStart(2,'0');
   function fdate(iso){
@@ -94,12 +97,29 @@ function fileUpdater(btn){
     save();
   }
   /* silent: otomatik kontrol. Ağ hatasında false döner (yeniden denenebilir). */
+  function ask(j){
+    asked=true;pending=j;btn.classList.add('ready');
+    const A=document.getElementById('updAsk');
+    document.getElementById('uaText').textContent='Yeni sürüm yayınlandı: '+fdate(j.date)+' · '+j.version+'. İndirmek ister misiniz?';
+    A.hidden=false;document.getElementById('uaYes').focus();
+  }
+  function closeAsk(){document.getElementById('updAsk').hidden=true;}
+  document.getElementById('uaYes').addEventListener('click',async()=>{
+    closeAsk();if(!pending||busy)return;busy=true;btn.disabled=true;
+    try{await download(pending);pending=null;}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);}
+    finally{busy=false;btn.disabled=false;}
+  });
+  document.getElementById('uaNo').addEventListener('click',()=>{closeAsk();setStatus('Yeni sürüm şimdi indirilmedi. İstediğinizde Güncelle düğmesine basın.');});
+  const net=()=>setNetOff(!navigator.onLine);
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
   async function check(silent){
-    if(!navigator.onLine){if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return false;}
+    if(!navigator.onLine){setNetOff(true);if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return false;}
     if(!silent)setStatus('Sürüm kontrol ediliyor.');
     let j;
-    try{j=await getJSON();}catch(_){if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
+    try{j=await getJSON();}catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
+    setNetOff(false);
     if(!j||!j.version||num(j.version)<=num(VER)){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    if(silent){if(!asked)ask(j);return true;}   /* otomatik kontrolde yalnızca bir kez sorulur */
     try{await download(j);}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);return false;}
     return true;
   }
@@ -120,6 +140,7 @@ function fileUpdater(btn){
   btn.addEventListener('click',async()=>{
     if(busy)return;
     if(file){save();return;}
+    closeAsk();
     busy=true;btn.disabled=true;
     try{if(await check(false))stopAuto();}
     finally{busy=false;btn.disabled=false;}

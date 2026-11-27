@@ -13,6 +13,9 @@ html=''.join(open(d+p,encoding='utf-8').read() for p in parts)
 assert len(re.findall(r"const VER='[^']*';",html))==1
 html=re.sub(r"const VER='[^']*';","const VER='%s';"%ver,html)
 html=html.replace("const UPDATE_URL='';","const UPDATE_URL=%s;"%json.dumps(url))
+import datetime as _dt
+assert html.count("const BUILD_DATE='';")==1
+html=html.replace("const BUILD_DATE='';","const BUILD_DATE='%s';"%_dt.date.today().strftime('%d.%m.%Y'))
 open(o+'index.html','w',encoding='utf-8').write(html)
 open(o+'DICOM_Goruntuleyici.html','w',encoding='utf-8').write(html)
 open(o+'version.json','w').write(json.dumps({'version':ver,'date':__import__('datetime').date.today().isoformat(),'name':'DICOM Görüntüleyici'},ensure_ascii=False)+'\n')

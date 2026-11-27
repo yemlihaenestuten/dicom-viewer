@@ -155,6 +155,11 @@ footer{display:flex;flex-direction:column;gap:6px}
 .upd:hover{border-color:var(--accent)}
 .upd.ready{background:var(--accent);color:#06201c;border-color:var(--accent)}
 .upd[disabled]{opacity:.6;cursor:default}
+.offl{margin-left:8px;padding:1px 8px;border-radius:10px;border:1px solid var(--mark);color:var(--mark);font-size:11px;font-weight:600}
+.offl[hidden]{display:none}
+.nhide{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mute);cursor:pointer}
+.nhide input{width:18px;height:18px;accent-color:var(--accent)}
+.wfoot .btn.no{min-height:44px;padding:8px 16px}
 #helpBtn{min-height:28px;padding:2px 10px;font-size:12px;margin-left:6px}
 #langSel{min-height:28px;padding:2px 6px;font-size:12px;margin-left:6px;width:auto;max-width:110px}
 .welcome{position:fixed;inset:0;z-index:100;background:rgba(5,8,10,.78);display:flex;align-items:center;justify-content:center;padding:14px}
@@ -378,11 +383,32 @@ footer{display:flex;flex-direction:column;gap:6px}
     </div>
   </div>
 </div>
+<div class="welcome" id="news" role="dialog" aria-modal="true" aria-labelledby="nTitle" hidden data-nt>
+  <div class="wbox">
+    <header><h2 id="nTitle"></h2><p class="sub" id="nSub"></p></header>
+    <div class="wbody" id="nBody"></div>
+    <div class="wfoot">
+      <label class="nhide"><input type="checkbox" id="nHide"><span id="nHideTx"></span></label>
+      <button class="btn go" id="nClose" type="button"></button>
+    </div>
+  </div>
+</div>
+<div class="welcome" id="updAsk" role="dialog" aria-modal="true" aria-labelledby="uaTitle" hidden>
+  <div class="wbox" style="width:min(460px,100%)">
+    <header><h2 id="uaTitle">Güncelleme var</h2></header>
+    <div class="wbody"><p id="uaText"></p></div>
+    <div class="wfoot">
+      <button class="btn no" id="uaNo" type="button">Şimdi değil</button>
+      <button class="btn go" id="uaYes" type="button">İndir</button>
+    </div>
+  </div>
+</div>
 <footer id="foot" data-nt><button id="updBtn" class="upd" type="button" hidden>Güncelle</button></footer>
 <script>
 /* ---------- Dil desteği: Türkçe (varsayılan), İngilizce, Almanca, Korece, Japonca, Rusça ---------- */
 /* Kaynak metinler Türkçedir. TX() tam eşleşme arar, bulamazsa ifade kalıplarını (PHR) uygular. */
-const VER='V.2';
+const VER='V.3';
+const BUILD_DATE='27.11.2026';/* yayın tarihi GG.AA.YYYY (make_site.py yazar) */
 const UPDATE_URL="https://yemlihaenestuten.github.io/dicom-viewer/";/* yayın adresi (GitHub Pages) */
 const UPD_FILE=location.protocol==='file:';
 const LANGS=['en','de','ko','ja','ru'];
@@ -613,6 +639,16 @@ const EXACT_ROWS=[
  ["Yeni sürüm indiriliyor.", "Downloading the new version.", "Die neue Version wird heruntergeladen.", "새 버전을 다운로드하는 중입니다.", "新しいバージョンをダウンロード中です。", "Скачивается новая версия."],
  ["Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.", "You are offline. Updating needs an internet connection. The program keeps working with the current version.", "Sie sind offline. Für das Update ist eine Internetverbindung nötig. Das Programm läuft mit der aktuellen Version weiter.", "오프라인 상태입니다. 업데이트에는 인터넷 연결이 필요합니다. 프로그램은 현재 버전으로 계속 작동합니다.", "オフラインです。更新にはインターネット接続が必要です。プログラムは現在のバージョンで引き続き動作します。", "Нет подключения к интернету. Для обновления нужен интернет. Программа продолжает работать в текущей версии."],
  ["Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.", "Could not get the version information. Check your internet connection.", "Die Versionsinformation konnte nicht abgerufen werden. Prüfen Sie die Internetverbindung.", "버전 정보를 가져올 수 없습니다. 인터넷 연결을 확인하세요.", "バージョン情報を取得できませんでした。インターネット接続を確認してください。", "Не удалось получить сведения о версии. Проверьте подключение к интернету."],
+ ["Çevrimdışısınız", "Offline", "Offline", "오프라인", "オフライン", "Офлайн"],
+ ["İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder", "No internet connection. Updates cannot be checked. The program keeps working with this version", "Keine Internetverbindung. Updates können nicht geprüft werden. Das Programm läuft mit dieser Version weiter", "인터넷에 연결되어 있지 않습니다. 업데이트를 확인할 수 없습니다. 프로그램은 현재 버전으로 계속 작동합니다", "インターネットに接続されていません。更新を確認できません。プログラムはこのバージョンで引き続き動作します", "Нет подключения к интернету. Проверить обновления нельзя. Программа продолжает работать в этой версии"],
+ ["Güncelleme var", "Update available", "Update verfügbar", "업데이트 있음", "更新があります", "Доступно обновление"],
+ ["İndir", "Download", "Herunterladen", "다운로드", "ダウンロード", "Скачать"],
+ ["Şimdi değil", "Not now", "Jetzt nicht", "나중에", "後で", "Не сейчас"],
+ ["Yeni sürümü indirip kaydeder", "Downloads and saves the new version", "Lädt die neue Version herunter und speichert sie", "새 버전을 다운로드하여 저장합니다", "新しいバージョンをダウンロードして保存します", "Скачивает и сохраняет новую версию"],
+ ["Şimdilik indirmez. Daha sonra Güncelle düğmesiyle indirebilirsiniz", "Does not download for now. You can download it later with the Update button", "Lädt vorerst nicht herunter. Später können Sie über Aktualisieren herunterladen", "지금은 다운로드하지 않습니다. 나중에 업데이트 버튼으로 다운로드할 수 있습니다", "今はダウンロードしません。後で更新ボタンからダウンロードできます", "Пока не скачивать. Позже можно скачать кнопкой «Обновить»"],
+ ["Yenilikler penceresini kapatır", "Closes the What's new window", "Schließt das Fenster Neuigkeiten", "새로운 기능 창을 닫습니다", "新機能ウィンドウを閉じます", "Закрывает окно «Что нового»"],
+ ["İşaretlenirse bu sürümün yenilikleri bir daha gösterilmez", "If ticked, this version's news will not be shown again", "Wenn angekreuzt, werden die Neuigkeiten dieser Version nicht mehr angezeigt", "선택하면 이 버전의 새로운 기능을 다시 표시하지 않습니다", "チェックすると、このバージョンの新機能は再表示されません", "Если отмечено, новости этой версии больше не показываются"],
+ ["Yeni sürüm şimdi indirilmedi. İstediğinizde Güncelle düğmesine basın.", "The new version was not downloaded now. Press the Update button whenever you like.", "Die neue Version wurde jetzt nicht heruntergeladen. Drücken Sie jederzeit auf Aktualisieren.", "새 버전을 지금 다운로드하지 않았습니다. 원할 때 업데이트 버튼을 누르세요.", "新しいバージョンは今はダウンロードしませんでした。必要なときに更新ボタンを押してください。", "Новая версия сейчас не скачана. Нажмите «Обновить», когда захотите."],
  ["Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.", "The update could not be downloaded. Check your internet connection.", "Das Update konnte nicht heruntergeladen werden. Prüfen Sie die Internetverbindung.", "업데이트를 다운로드할 수 없습니다. 인터넷 연결을 확인하세요.", "更新をダウンロードできませんでした。インターネット接続を確認してください。", "Не удалось скачать обновление. Проверьте подключение к интернету."],
  ["Güncelleme tamamlanamadı. Sayfayı yenileyip tekrar deneyin.", "The update could not be completed. Reload the page and try again.", "Das Update konnte nicht abgeschlossen werden. Laden Sie die Seite neu und versuchen Sie es erneut.", "업데이트를 완료할 수 없습니다. 페이지를 새로 고친 후 다시 시도하세요.", "更新を完了できませんでした。ページを再読み込みしてもう一度お試しください。", "Не удалось завершить обновление. Обновите страницу и повторите попытку."],
 ];
@@ -686,6 +722,8 @@ const PHR_ROWS=[
  [lit("Aksiyel"),"Axial","Axial","축상","アキシャル","Аксиальная"],
  [lit("Koronal"),"Coronal","Koronar","관상","コロナル","Корональная"],
  [lit("Program güncel. Sürüm: "),"The program is up to date. Version: ","Das Programm ist aktuell. Version: ","프로그램이 최신 상태입니다. 버전: ","プログラムは最新です。バージョン：","Программа обновлена. Версия: "],
+ [lit("Yeni sürüm yayınlandı: "),"A new version has been released: ","Eine neue Version ist erschienen: ","새 버전이 출시되었습니다: ","新しいバージョンが公開されました：","Вышла новая версия: "],
+ [lit(". İndirmek ister misiniz?"),". Do you want to download it?",". Möchten Sie sie herunterladen?",". 다운로드하시겠습니까?","。ダウンロードしますか？",". Скачать её?"],
  [lit("Yeni sürüm bulundu: "),"New version found: ","Neue Version gefunden: ","새 버전 발견: ","新しいバージョンが見つかりました：","Найдена новая версия: "],
  [lit(". İndiriliyor."),". Downloading.",". Wird heruntergeladen.",". 다운로드하는 중입니다.","。ダウンロード中です。",". Скачивается."],
  [lit("Yeni sürüm kaydedildi: "),"New version saved: ","Neue Version gespeichert: ","새 버전 저장됨: ","新しいバージョンを保存しました：","Новая версия сохранена: "],
@@ -739,7 +777,7 @@ body:`<h3>Nerelerde çalışır</h3>
 <li>Türkçe, İngilizce, Almanca, Korece, Japonca ve Rusça arayüz sunar.</li>
 <li><b>Açı</b> düğmesi tüm kesitlerin kenarında 0-360° açı skalasını gösterir. Cihaz listesinden Varian (180° altta) ya da Elekta (0° altta) seçilir.</li>
 <li>Fareyle bir düğmenin üstüne gelince ne işe yaradığını yazar. <b>İlk görünüm</b> düğmesi ekranı dosya ilk yüklendiğinde tüm serilerin ayrı kutularda açıldığı haline döndürür.</li>
-<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar.</li>
+<li>Tek dosya olarak da bir web adresinden de çevrimdışı çalışır. Sayfanın altındaki <b>Güncelle</b> düğmesi yeni sürümü indirir. Tek dosya olarak açıldığında yeni sürüm <i>DICOM GÖRÜNTÜLEYİCİ_tarih_sürüm.html</i> adıyla kaydedilir. Program açıldıktan sonraki ilk 1 dakika içinde yeni sürüme kendisi de bakar ve bulursa indirmeden önce sorar. İnternet yoksa düğmenin yanında <b>Çevrimdışısınız</b> yazar. Her güncellemeden sonra <b>Yenilikler</b> penceresi açılır.</li>
 </ul>
 <h3>Bilmeniz gerekenler</h3>
 <ul>
@@ -776,7 +814,7 @@ body:`<h3>Where it works</h3>
 <li>Offers the interface in Turkish, English, German, Korean, Japanese and Russian.</li>
 <li>The <b>Angle</b> button shows a 0-360° angle scale around the edges of every view. Choose Varian (180° at the bottom) or Elekta (0° at the bottom) from the device list.</li>
 <li>Hovering over a button with the mouse shows what it does. The <b>Initial view</b> button returns the screen to the layout shown when the file was first loaded, with all series open in separate cells.</li>
-<li>Works offline both as a single file and from a web address. The <b>Update</b> button at the bottom of the page downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself.</li>
+<li>Works offline both as a single file and from a web address. The <b>Update</b> button at the bottom of the page downloads the new version. When opened as a single file, the new version is saved as <i>DICOM GÖRÜNTÜLEYİCİ_date_version.html</i>. During the first minute after opening, the program also checks for a new version by itself and asks before downloading it. Without internet, <b>Offline</b> appears next to the button. After every update a <b>What's new</b> window opens.</li>
 </ul>
 <h3>Good to know</h3>
 <ul>
@@ -813,7 +851,7 @@ body:`<h3>Wo es funktioniert</h3>
 <li>Bietet die Oberfläche auf Türkisch, Englisch, Deutsch, Koreanisch, Japanisch und Russisch.</li>
 <li>Die Schaltfläche <b>Winkel</b> zeigt am Rand jeder Ansicht eine Winkelskala von 0 bis 360°. In der Geräteliste wählen Sie Varian (180° unten) oder Elekta (0° unten).</li>
 <li>Beim Überfahren einer Schaltfläche mit der Maus wird angezeigt, was sie tut. Die Schaltfläche <b>Ausgangsansicht</b> stellt die Ansicht wie beim ersten Laden der Datei wieder her, mit allen Serien in getrennten Feldern.</li>
-<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> unten auf der Seite lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version.</li>
+<li>Funktioniert offline, sowohl als einzelne Datei als auch von einer Webadresse. Die Schaltfläche <b>Aktualisieren</b> unten auf der Seite lädt die neue Version herunter. Als einzelne Datei geöffnet, wird die neue Version als <i>DICOM GÖRÜNTÜLEYİCİ_Datum_Version.html</i> gespeichert. In der ersten Minute nach dem Öffnen prüft das Programm auch selbst auf eine neue Version und fragt vor dem Herunterladen. Ohne Internet steht neben der Schaltfläche <b>Offline</b>. Nach jedem Update öffnet sich das Fenster <b>Neuigkeiten</b>.</li>
 </ul>
 <h3>Gut zu wissen</h3>
 <ul>
@@ -850,7 +888,7 @@ body:`<h3>사용 가능한 환경</h3>
 <li>터키어, 영어, 독일어, 한국어, 일본어, 러시아어 인터페이스를 제공합니다.</li>
 <li><b>각도</b> 버튼은 모든 화면의 가장자리에 0–360° 각도 눈금을 표시합니다. 장비 목록에서 Varian(180° 아래) 또는 Elekta(0° 아래)를 선택하세요.</li>
 <li>마우스를 버튼 위에 올리면 기능 설명이 표시됩니다. <b>초기 화면</b> 버튼은 파일을 처음 불러왔을 때의 화면, 즉 모든 시리즈가 개별 칸에 열린 상태로 되돌립니다.</li>
-<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인합니다.</li>
+<li>단일 파일로도 웹 주소에서도 오프라인으로 작동합니다. 페이지 아래쪽의 <b>업데이트</b> 버튼이 새 버전을 다운로드합니다. 단일 파일로 열었을 때는 새 버전이 <i>DICOM GÖRÜNTÜLEYİCİ_날짜_버전.html</i> 이름으로 저장됩니다. 프로그램을 연 후 처음 1분 동안은 프로그램이 스스로도 새 버전을 확인하고, 발견하면 다운로드 전에 묻습니다. 인터넷이 없으면 버튼 옆에 <b>오프라인</b>이 표시됩니다. 업데이트할 때마다 <b>새로운 기능</b> 창이 열립니다.</li>
 </ul>
 <h3>알아 두세요</h3>
 <ul>
@@ -887,7 +925,7 @@ body:`<h3>動作環境</h3>
 <li>トルコ語、英語、ドイツ語、韓国語、日本語、ロシア語のインターフェースに対応しています。</li>
 <li><b>角度</b>ボタンは、すべてのビューの端に0〜360°の角度目盛りを表示します。装置のリストからVarian（180°が下）またはElekta（0°が下）を選択します。</li>
 <li>ボタンにマウスを重ねると、その機能が表示されます。<b>初期表示</b>ボタンは、ファイルを最初に読み込んだときの表示、つまりすべてのシリーズが別々のセルに開いた状態に戻します。</li>
-<li>単一ファイルでもWebアドレスからでもオフラインで動作します。ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認します。</li>
+<li>単一ファイルでもWebアドレスからでもオフラインで動作します。ページ下部の<b>更新</b>ボタンで新しいバージョンをダウンロードします。単一ファイルとして開いた場合、新しいバージョンは<i>DICOM GÖRÜNTÜLEYİCİ_日付_バージョン.html</i>という名前で保存されます。起動後の最初の1分間はプログラム自身も新しいバージョンを確認し、見つかるとダウンロード前に確認します。インターネットがないとボタンの横に<b>オフライン</b>と表示されます。更新のたびに<b>新機能</b>ウィンドウが開きます。</li>
 </ul>
 <h3>ご注意</h3>
 <ul>
@@ -924,7 +962,7 @@ body:`<h3>Где работает</h3>
 <li>Интерфейс доступен на турецком, английском, немецком, корейском, японском и русском языках.</li>
 <li>Кнопка <b>Угол</b> показывает шкалу углов 0–360° по краям всех изображений. В списке аппаратов выберите Varian (180° внизу) или Elekta (0° внизу).</li>
 <li>При наведении мыши на кнопку показывается, для чего она нужна. Кнопка <b>Исходный вид</b> возвращает экран к виду при первой загрузке файла: все серии открыты в отдельных ячейках.</li>
-<li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> внизу страницы скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии.</li>
+<li>Работает офлайн и как отдельный файл, и по веб-адресу. Кнопка <b>Обновить</b> внизу страницы скачивает новую версию. При открытии как отдельного файла новая версия сохраняется под именем <i>DICOM GÖRÜNTÜLEYİCİ_дата_версия.html</i>. В первую минуту после запуска программа также сама проверяет наличие новой версии и спрашивает перед скачиванием. Без интернета рядом с кнопкой появляется <b>Офлайн</b>. После каждого обновления открывается окно <b>Что нового</b>.</li>
 </ul>
 <h3>Важно знать</h3>
 <ul>
@@ -941,20 +979,68 @@ ko:["파일은 브라우저에서만 처리되며 어디에도 전송되지 않�
 ja:["ファイルはブラウザ内でのみ処理され、どこにも送信されません。診断目的には使用できません。", "マウス：ホイールでスライスを切り替え、Ctrl＋ホイールでズーム、右ボタンでコントラスト、中ボタンでパンを操作します。", "タッチ：選択したツールでドラッグし、2本指でズームします。コントラストとフュージョンは設定ボタンを押してください。複数のファイルを選ぶには、右上の「···」メニューから「選択」、続けて「すべて選択」を押します。より簡単な方法は、「ファイル」アプリでフォルダを圧縮し、1つのZIPを選ぶことです。"],
 ru:["Файлы обрабатываются только в вашем браузере и никуда не отправляются. Не предназначено для диагностики.", "Мышь: колесо листает срезы, Ctrl + колесо масштабирует, правая кнопка меняет контраст, средняя кнопка сдвигает изображение.", "Сенсорный экран: перетаскивайте выбранным инструментом и масштабируйте двумя пальцами. Контраст и слияние находятся за кнопкой «Настройки». Чтобы выбрать несколько файлов, откройте меню ··· вверху справа, нажмите «Выбрать», затем «Выбрать все». Проще заархивировать папку в приложении «Файлы» и выбрать один ZIP."]
 };
+
+/* ---------- Yenilikler penceresi: her sürümde 6 dilde güncellenir ---------- */
+const NEWS={
+tr:{title:'Yenilikler',hide:'Bir daha gösterme',btn:'Tamam',items:[
+ 'Yeni sürüm bulununca indirmeden önce sorulur. <b>İndir</b> derseniz yeni dosya kaydedilir. <b>Şimdi değil</b> derseniz daha sonra <b>Güncelle</b> düğmesiyle indirebilirsiniz.',
+ 'İnternet yoksa <b>Güncelle</b> düğmesinin yanında <b>Çevrimdışısınız</b> uyarısı görünür.',
+ 'Sağ altta sürüm numarasının yanında yayın tarihi de yazar.',
+ 'Her güncellemeden sonra bu <b>Yenilikler</b> penceresi açılır. <b>Bir daha gösterme</b> kutusunu işaretlerseniz bu sürüm için bir daha açılmaz.']},
+en:{title:"What's new",hide:"Don't show again",btn:'OK',items:[
+ 'When a new version is found, you are asked before it is downloaded. Choose <b>Download</b> to save the new file. Choose <b>Not now</b> to download it later with the <b>Update</b> button.',
+ 'Without internet, an <b>Offline</b> notice appears next to the <b>Update</b> button.',
+ 'The release date is now shown next to the version number at the bottom right.',
+ "This <b>What's new</b> window opens after every update. Tick <b>Don't show again</b> and it will not open again for this version."]},
+de:{title:'Neuigkeiten',hide:'Nicht mehr anzeigen',btn:'OK',items:[
+ 'Wird eine neue Version gefunden, werden Sie vor dem Herunterladen gefragt. Mit <b>Herunterladen</b> wird die neue Datei gespeichert. Mit <b>Jetzt nicht</b> können Sie sie später über <b>Aktualisieren</b> herunterladen.',
+ 'Ohne Internet erscheint neben <b>Aktualisieren</b> der Hinweis <b>Offline</b>.',
+ 'Unten rechts steht neben der Versionsnummer jetzt auch das Veröffentlichungsdatum.',
+ 'Dieses Fenster <b>Neuigkeiten</b> öffnet sich nach jedem Update. Wenn Sie <b>Nicht mehr anzeigen</b> ankreuzen, öffnet es sich für diese Version nicht mehr.']},
+ko:{title:'새로운 기능',hide:'다시 표시하지 않음',btn:'확인',items:[
+ '새 버전이 발견되면 다운로드하기 전에 묻습니다. <b>다운로드</b>를 선택하면 새 파일이 저장됩니다. <b>나중에</b>를 선택하면 나중에 <b>업데이트</b> 버튼으로 다운로드할 수 있습니다.',
+ '인터넷이 없으면 <b>업데이트</b> 버튼 옆에 <b>오프라인</b> 알림이 표시됩니다.',
+ '오른쪽 아래 버전 번호 옆에 배포 날짜도 표시됩니다.',
+ '업데이트할 때마다 이 <b>새로운 기능</b> 창이 열립니다. <b>다시 표시하지 않음</b>을 선택하면 이 버전에서는 다시 열리지 않습니다.']},
+ja:{title:'新機能',hide:'今後表示しない',btn:'OK',items:[
+ '新しいバージョンが見つかると、ダウンロード前に確認します。<b>ダウンロード</b>を選ぶと新しいファイルが保存されます。<b>後で</b>を選ぶと、後から<b>更新</b>ボタンでダウンロードできます。',
+ 'インターネットに接続していないと、<b>更新</b>ボタンの横に<b>オフライン</b>と表示されます。',
+ '右下のバージョン番号の横に公開日も表示されるようになりました。',
+ '更新のたびにこの<b>新機能</b>ウィンドウが開きます。<b>今後表示しない</b>にチェックすると、このバージョンでは再び開きません。']},
+ru:{title:'Что нового',hide:'Больше не показывать',btn:'ОК',items:[
+ 'Если найдена новая версия, перед скачиванием появляется вопрос. Нажмите <b>Скачать</b>, чтобы сохранить новый файл. Нажмите <b>Не сейчас</b>, чтобы скачать его позже кнопкой <b>Обновить</b>.',
+ 'Без интернета рядом с кнопкой <b>Обновить</b> появляется надпись <b>Офлайн</b>.',
+ 'Справа внизу рядом с номером версии теперь указана дата выпуска.',
+ 'Это окно <b>Что нового</b> открывается после каждого обновления. Если отметить <b>Больше не показывать</b>, для этой версии оно больше не откроется.']}
+};
+function fillNews(){
+  const n=NEWS[LANG]||NEWS.tr,t=document.getElementById('nTitle');if(!t)return;
+  t.textContent=n.title;
+  document.getElementById('nSub').textContent=(BUILD_DATE?BUILD_DATE+' · ':'')+VER;
+  document.getElementById('nBody').innerHTML='<ul>'+n.items.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  document.getElementById('nHideTx').textContent=n.hide;
+  document.getElementById('nClose').textContent=n.btn;
+}
 function fillWelcome(){
   const w=WELCOME[LANG];
   $('#wTitle').textContent=w.title;$('#wSub').textContent=w.sub;$('#wBody').innerHTML=w.body;$('#wSign').innerHTML=w.sign;$('#wClose').textContent=w.btn;
 }
+let NET_OFF=false;
+function setNetOff(v){NET_OFF=!!v;const e=document.getElementById('offl');if(e)e.hidden=!NET_OFF;}
 function fillFooter(){
   const f=FOOT[LANG],ub=$('#updBtn');
-  $('#foot').innerHTML=`${esc(f[0])}\n  <span class="only-mouse">${esc(f[1])}</span>\n  <span class="only-touch">${esc(f[2])}</span>\n  <div class="credit"><span>${esc(TX('Medikal Fizik Uzmanı'))}</span> Yemliha Enes TÜTEN <span class="ver">· ${VER}</span></div>`;
-  if(ub){const c=$('#foot .credit');if(c)c.appendChild(ub);ub.textContent=TX('Güncelle');ub.title=TX(UPD_FILE?'Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
+  $('#foot').innerHTML=`${esc(f[0])}\n  <span class="only-mouse">${esc(f[1])}</span>\n  <span class="only-touch">${esc(f[2])}</span>\n  <div class="credit"><span>${esc(TX('Medikal Fizik Uzmanı'))}</span> Yemliha Enes TÜTEN <span class="ver">· ${BUILD_DATE?BUILD_DATE+' · ':''}${VER}</span></div>`;
+  if(ub){const c=$('#foot .credit');if(c){c.appendChild(ub);const o=document.createElement('span');o.id='offl';o.className='offl';o.textContent=TX('Çevrimdışısınız');o.title=TX('İnternet bağlantısı yok. Güncelleme kontrol edilemiyor. Program bu sürümle çalışmaya devam eder');o.hidden=!NET_OFF;c.appendChild(o);}ub.textContent=TX('Güncelle');ub.title=TX(UPD_FILE?'Yeni sürüm olup olmadığına bakar. Varsa yeni HTML dosyasını indirip kaydeder. İnternet gerekir. Program açıldıktan sonraki ilk 1 dakika içinde kendisi de bir kez kontrol eder':'Yeni sürüm olup olmadığına bakar. Varsa indirir ve programı yeniler. İnternet gerekir, güncellemeden sonra program yine çevrimdışı çalışır');}
 }
 
 const TIPS=[
  ["#angBtn","Tüm kesitlerin kenarında 0-360° açı skalasını gösterir ya da gizler"],
  ["#angDev","Cihaz seçimi: Varian'da 180° görüntünün altında, Elekta'da 0° altında yer alır"],
  ["#helpBtn","Kullanım kılavuzunu ve özellik listesini açar"],
+ ["#uaYes","Yeni sürümü indirip kaydeder"],
+ ["#uaNo","Şimdilik indirmez. Daha sonra Güncelle düğmesiyle indirebilirsiniz"],
+ ["#nClose","Yenilikler penceresini kapatır"],
+ ["#nHide","İşaretlenirse bu sürümün yenilikleri bir daha gösterilmez"],
  ["#langSel","Arayüz dilini seçin"],
  ["#seriesSel","Görüntülenecek seriyi seçer"],
  ["#layoutSel","Ekranı 3 kesite ya da 1×1'den 6×6'ya kadar seri ızgarasına böler"],
@@ -1074,7 +1160,7 @@ function applyLang(l,keepStore){
   document.documentElement.lang=LANG;
   document.title=TX('DICOM Görüntüleyici');
   const sel=document.getElementById('langSel');if(sel){sel.value=LANG;sel.title=TX('Arayüz dilini seçin');sel.ariaLabel=TX('Dil');}
-  fillWelcome();fillFooter();
+  fillWelcome();fillNews();fillFooter();
   trTree(document.body);
   startObs();
   if(typeof renderAll==='function'&&typeof S!=='undefined'&&S.cur)try{renderAll();}catch(_){}
@@ -2026,7 +2112,19 @@ addEventListener('drop',async e=>{
   document.getElementById('helpBtn').addEventListener('click',show);
   W.addEventListener('click',e=>{if(e.target===W)hide();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!W.hidden)hide();});
-  show();
+  /* Yenilikler: her sürümde, "Bir daha gösterme" işaretlenene kadar karşılamadan önce açılır */
+  const N=document.getElementById('news'),KEY='dicomNewsHide';
+  let seen='';try{seen=localStorage.getItem(KEY)||'';}catch(_){}
+  if(!N||seen===VER){show();return;}
+  const closeN=()=>{
+    if(N.hidden)return;
+    if(document.getElementById('nHide').checked){try{localStorage.setItem(KEY,VER);}catch(_){}}
+    N.hidden=true;show();
+  };
+  document.getElementById('nClose').addEventListener('click',closeN);
+  N.addEventListener('click',e=>{if(e.target===N)closeN();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!N.hidden){e.stopImmediatePropagation();closeN();}},true);
+  N.hidden=false;document.getElementById('nClose').focus();
 })();
 
 /* ---------- Seriler paneli, ızgara görünümleri, elle füzyon ---------- */
@@ -2686,6 +2784,8 @@ loadSample();
   const btn=$('#updBtn');if(!btn)return;
   /* Tek dosya olarak (file://) açıldığında: yalnızca yayın adresi varsa düğme o adresi açar */
   if(UPD_FILE){fileUpdater(btn);return;}
+  const net=()=>setNetOff(!navigator.onLine);
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
   if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;
   let reg=null,waiting=null,busy=false;
   function head(tag,attrs){const e=document.createElement(tag);Object.keys(attrs).forEach(k=>e.setAttribute(k,attrs[k]));document.head.appendChild(e);}
@@ -2701,14 +2801,15 @@ loadSample();
     setStatus('Yeni sürüm hazır: '+ver+'. Yüklü görüntüler kapanacak. Güncellemek için düğmeye tekrar basın.');
   }
   async function check(silent){
-    if(!navigator.onLine){if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return;}
+    if(!navigator.onLine){setNetOff(true);if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return;}
     if(!silent)setStatus('Sürüm kontrol ediliyor.');
     let j;
     try{
       const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});
       if(!r.ok)throw new Error('http '+r.status);
       j=await r.json();
-    }catch(_){if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
+    }catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return;}
+    setNetOff(false);
     if(!j||!j.version||j.version===VER){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return;}
     if(!silent)setStatus('Yeni sürüm indiriliyor.');
     try{
@@ -2746,7 +2847,7 @@ function fileUpdater(btn){
   btn.hidden=false;
   const BASE=UPDATE_URL.replace(/\/?$/,'/');
   const WINDOW_MS=60000,RETRY_MS=15000,T0=Date.now();
-  let busy=false,autoDone=false,timer=0,file=null;
+  let busy=false,autoDone=false,timer=0,file=null,pending=null,asked=false;
   const num=v=>{const m=/(\d+)/.exec(String(v||''));return m?+m[1]:0;};
   const pad=n=>String(n).padStart(2,'0');
   function fdate(iso){
@@ -2777,12 +2878,29 @@ function fileUpdater(btn){
     save();
   }
   /* silent: otomatik kontrol. Ağ hatasında false döner (yeniden denenebilir). */
+  function ask(j){
+    asked=true;pending=j;btn.classList.add('ready');
+    const A=document.getElementById('updAsk');
+    document.getElementById('uaText').textContent='Yeni sürüm yayınlandı: '+fdate(j.date)+' · '+j.version+'. İndirmek ister misiniz?';
+    A.hidden=false;document.getElementById('uaYes').focus();
+  }
+  function closeAsk(){document.getElementById('updAsk').hidden=true;}
+  document.getElementById('uaYes').addEventListener('click',async()=>{
+    closeAsk();if(!pending||busy)return;busy=true;btn.disabled=true;
+    try{await download(pending);pending=null;}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);}
+    finally{busy=false;btn.disabled=false;}
+  });
+  document.getElementById('uaNo').addEventListener('click',()=>{closeAsk();setStatus('Yeni sürüm şimdi indirilmedi. İstediğinizde Güncelle düğmesine basın.');});
+  const net=()=>setNetOff(!navigator.onLine);
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
   async function check(silent){
-    if(!navigator.onLine){if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return false;}
+    if(!navigator.onLine){setNetOff(true);if(!silent)setStatus('Çevrimdışısınız. Güncelleme için internet gerekir. Program mevcut sürümle çalışmaya devam eder.',true);return false;}
     if(!silent)setStatus('Sürüm kontrol ediliyor.');
     let j;
-    try{j=await getJSON();}catch(_){if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
+    try{j=await getJSON();}catch(_){setNetOff(true);if(!silent)setStatus('Sürüm bilgisi alınamadı. İnternet bağlantısını kontrol edin.',true);return false;}
+    setNetOff(false);
     if(!j||!j.version||num(j.version)<=num(VER)){if(!silent)setStatus('Program güncel. Sürüm: '+VER);return true;}
+    if(silent){if(!asked)ask(j);return true;}   /* otomatik kontrolde yalnızca bir kez sorulur */
     try{await download(j);}catch(_){setStatus('Güncelleme indirilemedi. İnternet bağlantısını kontrol edin.',true);return false;}
     return true;
   }
@@ -2803,6 +2921,7 @@ function fileUpdater(btn){
   btn.addEventListener('click',async()=>{
     if(busy)return;
     if(file){save();return;}
+    closeAsk();
     busy=true;btn.disabled=true;
     try{if(await check(false))stopAuto();}
     finally{busy=false;btn.disabled=false;}

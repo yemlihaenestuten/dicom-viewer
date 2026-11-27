@@ -330,5 +330,17 @@ addEventListener('drop',async e=>{
   document.getElementById('helpBtn').addEventListener('click',show);
   W.addEventListener('click',e=>{if(e.target===W)hide();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!W.hidden)hide();});
-  show();
+  /* Yenilikler: her sürümde, "Bir daha gösterme" işaretlenene kadar karşılamadan önce açılır */
+  const N=document.getElementById('news'),KEY='dicomNewsHide';
+  let seen='';try{seen=localStorage.getItem(KEY)||'';}catch(_){}
+  if(!N||seen===VER){show();return;}
+  const closeN=()=>{
+    if(N.hidden)return;
+    if(document.getElementById('nHide').checked){try{localStorage.setItem(KEY,VER);}catch(_){}}
+    N.hidden=true;show();
+  };
+  document.getElementById('nClose').addEventListener('click',closeN);
+  N.addEventListener('click',e=>{if(e.target===N)closeN();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!N.hidden){e.stopImmediatePropagation();closeN();}},true);
+  N.hidden=false;document.getElementById('nClose').focus();
 })();
